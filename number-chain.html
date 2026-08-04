@@ -344,5 +344,33 @@
     }
     document.addEventListener('DOMContentLoaded', updateUIState);
 </script>
-</body>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    document.querySelectorAll('.auth-login-btn').forEach(btn => {
+        btn.style.display = isLoggedIn ? 'none' : 'block';
+    });
+    document.querySelectorAll('.auth-profile-pic').forEach(pic => {
+        pic.style.display = isLoggedIn ? 'block' : 'none';
+    });
+    
+    if (!isLoggedIn && !window.location.pathname.endsWith('login.html')) {
+        document.addEventListener('click', (e) => {
+            const btnOrLink = e.target.closest('button, a, div[onclick]');
+            if (btnOrLink) {
+                if (btnOrLink.classList.contains('auth-login-btn') || btnOrLink.closest('.auth-login-btn') || btnOrLink.classList.contains('auth-profile-pic')) {
+                    return;
+                }
+                e.preventDefault();
+                e.stopPropagation();
+                if(confirm("Silakan Log In terlebih dahulu untuk mengakses fitur ini!")) {
+                    window.location.href = 'login.html';
+                }
+            }
+        }, true);
+    }
+});
+</script>
+\n</body>
 </html>

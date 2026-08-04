@@ -165,14 +165,14 @@
 <p class="text-on-surface-variant font-body-md">Access your administrative dominion.</p>
 </div>
 <!-- Form -->
-<form class="space-y-4 mb-8" onsubmit="event.preventDefault(); localStorage.setItem('isLoggedIn', 'true'); window.location.href='index.html';">
+<form id="login-form" class="space-y-4 mb-8" data-old="event.preventDefault(); localStorage.setItem('isLoggedIn', 'true'); window.location.href='index.html';">
 <div class="space-y-2">
 <label class="block text-caption font-label-md text-on-surface-variant uppercase tracking-widest ml-1">Email or Username</label>
-<input class="w-full bg-surface-container-low/50 border border-surface-variant/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary transition-all" placeholder="Enter your credentials" type="text" value="Wahyudha" required/>
+<input class="w-full bg-surface-container-low/50 border border-surface-variant/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary transition-all" placeholder="Enter your credentials" type="text" value="" id="username-input" required/>
 </div>
 <div class="space-y-2">
 <label class="block text-caption font-label-md text-on-surface-variant uppercase tracking-widest ml-1">Password</label>
-<input class="w-full bg-surface-container-low/50 border border-surface-variant/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary transition-all" placeholder="••••••••" type="password" required/>
+<input class="w-full bg-surface-container-low/50 border border-surface-variant/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary transition-all" placeholder="••••••••" type="password" id="password-input" required/>
 </div>
 <button class="w-full bg-primary text-on-primary-container font-bold py-3 px-4 rounded-lg hover:bg-surface-tint transition-all active:scale-95 duration-200 mt-4 shadow-[0_0_20px_rgba(255,184,116,0.2)]" type="submit">Log In</button>
 </form>
@@ -238,6 +238,25 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+});
+</script>
+
+<script id="login-form-script">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('login-form');
+    if(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = document.getElementById('username-input').value;
+            const pass = document.getElementById('password-input').value;
+            if (user === 'yudha' && pass === '123456') {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                alert('Username atau password salah!');
+            }
+        });
+    }
 });
 </script>
 </body></html>
