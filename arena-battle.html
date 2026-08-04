@@ -1,0 +1,695 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ruang ASN - Obsidian Glow Exam</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Design System Configuration -->
+<script id="tailwind-config">try{
+    try {
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-tint": "#FF9500",
+              "surface-bright": "#1c1c1e",
+              "on-primary-container": "#000000",
+              "error": "#ff453a",
+              "on-secondary-fixed-variant": "#d8e2ff",
+              "on-tertiary": "#000000",
+              "secondary-fixed-dim": "#c2c1ff",
+              "on-tertiary-fixed-variant": "#ffdbcc",
+              "primary-fixed": "#ff9500",
+              "on-primary-fixed": "#000000",
+              "inverse-on-surface": "#1a1b1f",
+              "outline": "#8e8e93",
+              "on-tertiary-fixed": "#351000",
+              "secondary": "#5e5ce6",
+              "surface-container-high": "#2c2c2e",
+              "primary": "#FF9500",
+              "background": "#000000",
+              "primary-fixed-dim": "#ffb340",
+              "surface-container": "#1c1c1e",
+              "on-error": "#000000",
+              "tertiary-container": "#c64f00",
+              "on-tertiary-container": "#fffbff",
+              "secondary-fixed": "#e2dfff",
+              "on-secondary": "#ffffff",
+              "error-container": "#4a0005",
+              "primary-container": "#FF9500",
+              "tertiary-fixed-dim": "#ffb595",
+              "inverse-surface": "#e3e2e7",
+              "surface-variant": "#3a3a3c",
+              "inverse-primary": "#0058bc",
+              "on-surface": "#ffffff",
+              "on-primary-fixed-variant": "#004493",
+              "surface-container-highest": "#3a3a3c",
+              "tertiary": "#ff9f0a",
+              "on-background": "#ffffff",
+              "surface-container-low": "#0e0e10",
+              "surface": "#000000",
+              "surface-container-lowest": "#000000",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#48484a",
+              "on-primary": "#000000",
+              "on-secondary-container": "#fffbff",
+              "on-secondary-fixed": "#0c006a",
+              "on-surface-variant": "#a1a1aa",
+              "secondary-container": "#5e5ce6",
+              "tertiary-fixed": "#ffdbcc",
+              "surface-dim": "#1c1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "stack-lg": "48px",
+              "stack-sm": "12px",
+              "container-padding-desktop": "40px",
+              "unit": "8px",
+              "stack-md": "24px",
+              "gutter": "24px",
+              "container-padding-mobile": "20px"
+            },
+            "fontFamily": {
+              "headline-lg-mobile": ["Inter"],
+              "headline-lg": ["Inter"],
+              "display": ["Inter"],
+              "body-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "label-caps": ["Inter"],
+              "title-md": ["Inter"]
+            },
+            "fontSize": {
+              "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+              "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+              "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+              "body-lg": ["17px", {"lineHeight": "1.5", "fontWeight": "400"}],
+              "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    } catch (_e) {}
+  }catch(_e){}</script>
+<style>
+      body {
+        background-color: #000000;
+        color: #e3e2e7;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+      }
+
+      .glass-card {
+        background: rgba(30, 31, 35, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .glow-primary {
+        box-shadow: 0 0 20px rgba(255, 149, 0, 0.3);
+      }
+
+      .timer-svg {
+        transform: rotate(-90deg);
+      }
+
+      .timer-circle {
+        stroke-dasharray: 283;
+        stroke-dashoffset: 70;
+        transition: stroke-dashoffset 1s linear;
+      }
+
+      /* Micro-interactions */
+      .option-card:hover {
+        border-color: #ff9500;
+        background: rgba(255, 149, 0, 0.05);
+        transform: translateX(4px);
+      }
+
+      .question-node {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+
+      /* Modal transitions */
+      .modal-animate-bg {
+        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .modal-animate-bg.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-animate-content {
+        transform: scale(0.95) translateY(15px);
+        opacity: 0;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease-out;
+      }
+      .modal-animate-bg.show .modal-animate-content {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    </style>
+</head>
+<body class="min-h-screen bg-background font-['Inter'] text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-desktop py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-[0_20px_40px_rgba(0,0,0,0.2)] hidden md:flex">
+<div class="flex items-center gap-3">
+<a href="index.html" class="font-display text-display text-primary tracking-tighter hover:opacity-80 transition-opacity" style="font-size: 24px;">Ruang ASN</a>
+<div class="h-5 w-[1px] bg-white/20"></div>
+<span id="selected-category-display" class="font-display text-white font-bold text-lg tracking-wide uppercase">TIU</span>
+</div>
+<div class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="font-label-caps text-label-caps text-primary font-semibold hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="index.html">Belajar</a>
+
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="history.html">Riwayat</a>
+
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="database-soal.html">Database</a>
+</div>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</nav>
+<!-- Mobile Header -->
+<header class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-mobile py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 md:hidden">
+<div class="flex items-center gap-2">
+<a href="index.html" class="font-display text-primary tracking-tighter text-xl font-bold hover:opacity-80 transition-opacity">Ruang ASN</a>
+<span id="selected-category-display-mobile" class="text-white text-xs font-bold uppercase bg-white/10 px-2 py-0.5 rounded">TIU</span>
+</div>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</header>
+<!-- Background Atmospheric Glows -->
+<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
+<!-- Main Content Grid -->
+<main class="w-full pt-20 px-container-padding-mobile md:px-container-padding-desktop min-h-screen flex flex-col pb-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 py-6 flex-grow">
+<!-- Left Column -->
+<div class="lg:col-span-10 flex flex-col gap-6">
+<!-- Tryout Header Card -->
+
+<!-- Question Card -->
+<div class="bg-surface-container rounded-2xl p-8 md:p-10 border border-white/5 flex flex-col justify-between gap-8 flex-grow min-h-[560px]">
+<div>
+<h2 class="text-primary font-bold text-lg mb-2" id="question-title">Soal Nomor 1</h2>
+<p id="question-text-content" class="text-on-surface-variant leading-relaxed text-[13px] md:text-sm">Dalam rangka menghormati umat beragama lain saat merayakan hari rayanya, sikap yang paling sesuai dengan pengamalan sila pertama Pancasila adalah...</p>
+</div>
+<!-- Options -->
+<div class="flex flex-col gap-3" id="options-container">
+<button class="option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all text-left border border-white/5 group">
+<span class="font-bold text-[13px] md:text-sm w-8 text-primary">A</span>
+<span class="text-[13px] md:text-sm text-on-surface-variant group-hover:text-on-surface leading-relaxed">Mengucapkan selamat dan ikut bergembira dalam suasana hari raya bersama pemeluk agama lain</span>
+</button>
+<button class="option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all text-left border border-white/5 group">
+<span class="font-bold text-[13px] md:text-sm w-8 text-primary">B</span>
+<span class="text-[13px] md:text-sm text-on-surface-variant group-hover:text-on-surface leading-relaxed">Membantu menjaga ketertiban lingkungan agar perayaan berjalan aman dan lancar</span>
+</button>
+<button class="option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all text-left border border-white/5 group">
+<span class="font-bold text-[13px] md:text-sm w-8 text-primary">C</span>
+<span class="text-[13px] md:text-sm text-on-surface-variant group-hover:text-on-surface leading-relaxed">Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya</span>
+</button>
+<button class="option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all text-left border border-white/5 group">
+<span class="font-bold text-[13px] md:text-sm w-8 text-primary">D</span>
+<span class="text-[13px] md:text-sm text-on-surface-variant group-hover:text-on-surface leading-relaxed">Menghargai perayaan dengan tidak menampilkan identitas agama sendiri demi menghindari perbedaan</span>
+</button>
+<button class="option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all text-left border border-white/5 group">
+<span class="font-bold text-[13px] md:text-sm w-8 text-primary">E</span>
+<span class="text-[13px] md:text-sm text-on-surface-variant group-hover:text-on-surface leading-relaxed">Menyambut perayaan dengan ikut serta dalam ritual doa agama lain sebagai wujud kebersamaan</span>
+</button>
+</div>
+<!-- Navigation -->
+<div class="flex justify-between items-center mt-8">
+<button id="btn-prev" class="px-8 py-3 rounded-full bg-surface-container-highest text-on-surface font-bold text-sm flex items-center gap-2 border border-white/10 hover:bg-surface-bright transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-sm">chevron_left</span>Sebelumnya
+                    </button>
+<button id="btn-next" class="px-8 py-3 rounded-full bg-primary-container text-on-primary-container font-bold text-sm flex items-center gap-2 glow-primary hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:glow-none">
+                        Soal Selanjutnya<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column (Sidebar) -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Timer Card -->
+<div class="bg-surface-container rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+    <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined text-primary text-base">timer</span>
+        <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Sisa</span>
+    </div>
+    <span class="font-mono text-2xl font-extrabold text-white tracking-wider" id="timer-display">30:00</span>
+</div>
+<!-- Question Grid Card -->
+<div class="bg-surface-container rounded-2xl p-4 border border-white/5">
+<p class="text-primary font-bold text-xs uppercase tracking-wider mb-3 text-center">Daftar Soal</p>
+<div class="flex justify-center w-full mt-2">
+<div class="grid grid-cols-5 gap-2" id="question-grid-container">
+<!-- Dynamically populated via JS -->
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<button onclick="openEndExamModal()" class="w-full py-4 rounded-xl bg-primary/10 text-primary border border-primary/30 font-bold text-sm hover:bg-primary/20 transition-all uppercase tracking-widest">
+                Akhiri
+            </button>
+</div>
+</div>
+</div>
+
+<!-- End Exam Confirmation Modal -->
+<div id="end-exam-modal" class="fixed inset-0 z-[300] bg-black/60 backdrop-blur-sm modal-animate-bg flex items-center justify-center p-4">
+    <div class="bg-surface-container-high border border-white/10 rounded-2xl p-6 md:p-8 max-w-sm w-full shadow-2xl flex flex-col items-center text-center modal-animate-content">
+        <div class="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined text-3xl">info</span>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Akhiri Ujian?</h3>
+        <p class="text-on-surface-variant text-sm mb-8">Apakah Anda yakin dengan jawaban Anda? Ujian akan diselesaikan dan waktu akan dihentikan.</p>
+        <div class="flex gap-3 w-full">
+            <button onclick="closeEndExamModal()" class="flex-1 py-3 rounded-xl border border-white/10 text-white font-bold hover:bg-white/5 transition-all">
+                Tidak
+            </button>
+            <button onclick="finishExam()" class="flex-1 py-3 rounded-xl bg-primary text-on-primary-container font-bold hover:bg-surface-tint transition-all glow-primary">
+                Ya, Akhiri
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Screen Modal -->
+<div id="summary-modal" class="fixed inset-0 z-[400] bg-black/90 backdrop-blur-md modal-animate-bg flex items-center justify-center p-4">
+    <div class="bg-surface-container border border-white/10 rounded-2xl p-8 max-w-md w-full shadow-2xl flex flex-col items-center text-center modal-animate-content">
+        <!-- Status Icon/Glow -->
+        <div id="summary-status-badge" class="w-20 h-20 rounded-full flex items-center justify-center mb-6">
+            <!-- Dynamic icon -->
+        </div>
+        
+        <h2 id="summary-status-title" class="text-3xl font-display font-extrabold mb-1">LULUS</h2>
+        <p id="summary-status-subtitle" class="text-on-surface-variant text-sm mb-6">Selamat! Anda memenuhi nilai ambang batas.</p>
+        
+        <!-- Score Board -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 w-full mb-8 space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-white/5">
+                <span class="text-xs text-on-surface-variant font-medium">Kategori Ujian</span>
+                <span id="summary-category" class="text-sm font-bold text-white uppercase">TWK</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b border-white/5">
+                <span class="text-xs text-on-surface-variant font-medium">Total Skor Anda</span>
+                <span id="summary-score" class="text-2xl font-black text-primary">125 / 150</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b border-white/5">
+                <span class="text-xs text-on-surface-variant font-medium">Nilai Ambang Batas</span>
+                <span id="summary-threshold" class="text-sm font-bold text-white">65</span>
+            </div>
+            <div class="grid grid-cols-2 gap-4 pt-2 text-center">
+                <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                    <div class="text-[11px] text-emerald-400 font-bold uppercase tracking-wider mb-1">Benar</div>
+                    <div id="summary-correct" class="text-2xl font-black text-white">0</div>
+                </div>
+                <div class="p-3 rounded-lg bg-error/10 border border-error/20">
+                    <div class="text-[11px] text-error font-bold uppercase tracking-wider mb-1">Salah</div>
+                    <div id="summary-wrong" class="text-2xl font-black text-white">0</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex flex-col gap-3 w-full">
+            <button onclick="window.location.reload()" class="w-full py-3.5 rounded-xl bg-primary text-on-primary-container font-bold hover:bg-surface-tint transition-all glow-primary">
+                Ulangi Ujian
+            </button>
+            <button onclick="window.location.href='index.html'" class="w-full py-3.5 rounded-xl border border-white/10 text-white font-bold hover:bg-white/5 transition-all">
+                Kembali ke Menu
+            </button>
+        </div>
+    </div>
+</div>
+
+</main>
+<script>
+    function updateUIState() {
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        let category = localStorage.getItem('selectedCategory') || 'TIU';
+        document.querySelectorAll('#selected-category-display, #selected-category-display-mobile').forEach(el => {
+            if (el) el.textContent = category;
+        });
+        document.querySelectorAll('.auth-login-btn').forEach(btn => {
+            btn.style.display = isLoggedIn ? 'none' : 'block';
+        });
+        document.querySelectorAll('.auth-profile-pic').forEach(pic => {
+            pic.style.display = isLoggedIn ? 'block' : 'none';
+        });
+    }
+    document.addEventListener('DOMContentLoaded', updateUIState);
+
+    // Interactive Question Navigation & State
+    let currentQuestion = 1;
+    const categoryQuestionCounts = {
+        'TWK': 30,
+        'TIU': 35,
+        'TKP': 45
+    };
+    let activeQuizCategory = localStorage.getItem('selectedCategory') || 'TWK';
+
+    let defaultQuestions = [
+    {
+        "q": "Dalam rangka menghormati umat beragama lain saat merayakan hari rayanya, sikap yang paling sesuai dengan pengamalan sila pertama Pancasila adalah...",
+        "options": [
+            "Mengucapkan selamat dan ikut bergembira dalam suasana hari raya bersama pemeluk agama lain",
+            "Membantu menjaga ketertiban lingkungan agar perayaan berjalan aman dan lancar",
+            "Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya",
+            "Menghargai perayaan dengan tidak menampilkan identitas agama sendiri demi menghindari perbedaan",
+            "Menyambut perayaan dengan ikut serta dalam ritual doa agama lain sebagai wujud kebersamaan"
+        ],
+        "a": "Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya",
+        "key": "C",
+        "pembahasan": "Sila pertama, 'Ketuhanan Yang Maha Esa,' menekankan pada kebebasan beragama dan toleransi antar umat beragama tanpa mencampuri ritual keagamaan masing-masing."
+    },
+    {
+        "q": "Integritas nasional merupakan pondasi penting dalam menjaga keutuhan NKRI. Salah satu wujud nyata dari sikap integritas sebagai seorang ASN adalah...",
+        "options": [
+            "Menolak segala bentuk gratifikasi dan melaporkannya sesuai prosedur hukum yang berlaku",
+            "Mengutamakan kepentingan kelompok tertentu yang memberikan dukungan politik",
+            "Memanfaatkan fasilitas kantor untuk kepentingan pribadi dalam batas wajar",
+            "Menerima imbalan tambahan atas pelayanan publik yang cepat dan memuaskan",
+            "Menyimpan informasi publik yang wajib dibuka demi pertimbangan subjektif"
+        ],
+        "a": "Menolak segala bentuk gratifikasi dan melaporkannya sesuai prosedur hukum yang berlaku",
+        "key": "A",
+        "pembahasan": "Menolak segala bentuk gratifikasi dan berani melaporkannya adalah nilai utama dari integritas seorang Aparatur Sipil Negara."
+    },
+    {
+        "q": "Semua mahasiswa psikologi memelajari perilaku manusia. Sebagian orang yang memelajari perilaku manusia menjadi konselor yang sukses. Kesimpulan yang benar adalah...",
+        "options": [
+            "Semua mahasiswa psikologi pasti menjadi konselor yang sukses",
+            "Sebagian mahasiswa psikologi mungkin menjadi konselor yang sukses",
+            "Tidak ada mahasiswa psikologi yang menjadi konselor sukses",
+            "Semua konselor yang sukses adalah mahasiswa psikologi",
+            "Orang yang bukan mahasiswa psikologi tidak bisa menjadi konselor"
+        ],
+        "a": "Sebagian mahasiswa psikologi mungkin menjadi konselor yang sukses",
+        "key": "B",
+        "pembahasan": "Karena sebagian pemelajar perilaku manusia menjadi konselor sukses, maka sebagian mahasiswa psikologi (yang juga memelajari perilaku manusia) mungkin menjadi konselor yang sukses."
+    }
+];
+    let dbKey = activeQuizCategory.toLowerCase() + 'DB_level1';
+    let saved = localStorage.getItem(dbKey);
+    let dbQuestions = defaultQuestions;
+    if (saved && saved !== '[]') {
+        dbQuestions = JSON.parse(saved);
+    }
+    const totalQuestions = dbQuestions.length;
+    
+    // Default to empty answers
+    const userAnswers = {};
+
+    function renderQuestionGrid() {
+        const gridContainer = document.getElementById('question-grid-container');
+        if (!gridContainer) return;
+        
+        gridContainer.innerHTML = '';
+        for (let i = 1; i <= totalQuestions; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            
+            // Base styles
+            let baseClasses = 'w-8 h-8 rounded text-[11px] font-bold flex items-center justify-center transition-all cursor-pointer ';
+            
+            if (i === currentQuestion) {
+                // Currently opened question: ORANGE
+                btn.className = baseClasses + 'bg-primary text-on-primary-container glow-primary border-2 border-primary font-bold shadow-lg shadow-primary/30';
+            } else if (userAnswers[i]) {
+                // Answered question: GREEN
+                btn.className = baseClasses + 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 hover:bg-emerald-500/30';
+            } else {
+                // Default / Unanswered: NEUTRAL
+                btn.className = baseClasses + 'border border-white/10 text-on-surface-variant hover:bg-white/5';
+            }
+            
+            btn.addEventListener('click', function() {
+                currentQuestion = i;
+                updateQuestionDisplay();
+                renderQuestionGrid();
+            });
+            
+            gridContainer.appendChild(btn);
+        }
+    }
+
+    function updateQuestionDisplay() {
+        const title = document.getElementById('question-title');
+        if (title) title.textContent = `Soal Nomor ${currentQuestion}`;
+        
+        const qText = document.getElementById('question-text-content');
+        const qData = dbQuestions[currentQuestion - 1];
+        if (qText && qData) {
+            qText.innerHTML = qData.q || qData.question || '';
+        }
+        
+        const optContainer = document.getElementById('options-container');
+        if (optContainer && qData && qData.options) {
+            optContainer.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D', 'E'];
+            const selectedOpt = userAnswers[currentQuestion];
+            qData.options.forEach((optText, idx) => {
+                const isSelected = selectedOpt === labels[idx];
+                const btn = document.createElement('button');
+                btn.className = isSelected 
+                    ? 'option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-primary/20 border border-primary transition-all text-left group'
+                    : 'option-card flex items-center gap-3 p-3 md:p-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all text-left border border-white/5 group';
+                btn.innerHTML = `<span class="font-bold text-[13px] md:text-sm w-8 text-primary">${labels[idx]}</span>
+                                 <span class="text-[13px] md:text-sm text-on-surface-variant group-hover:text-on-surface leading-relaxed">${optText}</span>`;
+                btn.onclick = function() {
+                    userAnswers[currentQuestion] = labels[idx];
+                    updateQuestionDisplay();
+                    renderQuestionGrid();
+                };
+                optContainer.appendChild(btn);
+            });
+        }
+        
+        // Update button states
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        if (btnPrev) btnPrev.disabled = currentQuestion === 1;
+        if (btnNext) {
+            if (currentQuestion === totalQuestions) {
+                const firstUnanswered = Array.from({length: totalQuestions}, (_, i) => i + 1).find(q => !userAnswers[q]);
+                btnNext.disabled = !firstUnanswered;
+            } else {
+                btnNext.disabled = false;
+            }
+        }
+    }
+    
+    
+
+    // Handle Next and Previous Navigation
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    
+    if (btnPrev && btnNext) {
+        btnPrev.addEventListener('click', () => {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                updateQuestionDisplay();
+                renderQuestionGrid();
+            }
+        });
+
+        btnNext.addEventListener('click', () => {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                updateQuestionDisplay();
+                renderQuestionGrid();
+            } else {
+                const firstUnanswered = Array.from({length: totalQuestions}, (_, i) => i + 1).find(q => !userAnswers[q]);
+                if (firstUnanswered) {
+                    currentQuestion = firstUnanswered;
+                    updateQuestionDisplay();
+                    renderQuestionGrid();
+                }
+            }
+        });
+    }
+
+    // Modal logic
+    function openEndExamModal() {
+        document.getElementById('end-exam-modal').classList.add('show');
+    }
+
+    function closeEndExamModal() {
+        document.getElementById('end-exam-modal').classList.remove('show');
+    }
+
+    // Category-specific timer configuration
+    const categoryDurations = {
+        'TWK': 30 * 60, // 30 mins
+        'TIU': 30 * 60, // 30 mins
+        'TKP': 40 * 60  // 40 mins
+    };
+
+    let activeCategory = localStorage.getItem('selectedCategory') || 'TWK';
+    let timerSeconds = categoryDurations[activeCategory] || (30 * 60);
+
+    function formatTimer(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        const pad = n => String(n).padStart(2, '0');
+        return `${pad(mins)}:${pad(secs)}`;
+    }
+
+    function updateTimerDisplay() {
+        const timerEl = document.getElementById('timer-display');
+        if (timerEl) {
+            timerEl.textContent = formatTimer(timerSeconds);
+        }
+    }
+
+    // Countdown interval
+    let timerInterval = setInterval(() => {
+        if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerDisplay();
+            if (timerSeconds === 0) {
+                clearInterval(timerInterval);
+                finishExam();
+            }
+        }
+    }, 1000);
+
+    function finishExam() {
+        closeEndExamModal();
+        
+        // Stop timer
+        if (timerInterval) {
+            clearInterval(timerInterval);
+        }
+        timerSeconds = 0;
+        updateTimerDisplay();
+        
+        let correctCount = 0;
+        let wrongCount = 0;
+        let emptyCount = 0;
+        let score = 0;
+        
+        const labels = ['A', 'B', 'C', 'D', 'E'];
+        
+        for (let i = 0; i < totalQuestions; i++) {
+            const qData = dbQuestions[i];
+            const selectedLabel = userAnswers[i + 1];
+            
+            if (!selectedLabel) {
+                emptyCount++;
+            } else {
+                let isCorrect = false;
+                const selectedIndex = labels.indexOf(selectedLabel);
+                
+                if (activeQuizCategory === 'TKP') {
+                    let pts = 0;
+                    if (qData.tkpScores && selectedIndex !== -1 && selectedIndex < qData.tkpScores.length) {
+                        pts = parseInt(qData.tkpScores[selectedIndex]) || 0;
+                    }
+                    score += pts;
+                    if (pts === 5) {
+                        isCorrect = true; // For stats, 5 points is considered "Correct"
+                    }
+                } else {
+                    if (qData.key && selectedLabel === qData.key) {
+                        isCorrect = true;
+                    } else if (qData.a && qData.options) {
+                        if (selectedIndex !== -1 && qData.options[selectedIndex] === qData.a) {
+                            isCorrect = true;
+                        }
+                    }
+                    if (isCorrect) score += 5;
+                }
+                
+                if (isCorrect) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            }
+        }
+        
+        const maxScore = totalQuestions * 5;
+        
+        // Passing thresholds
+        const thresholds = {
+            'TWK': 65,
+            'TIU': 80,
+            'TKP': 166
+        };
+        const passingScore = thresholds[activeQuizCategory] || 65;
+        const isPassed = score >= passingScore;
+        
+        // Update summary elements
+        document.getElementById('summary-category').textContent = activeQuizCategory;
+        document.getElementById('summary-score').textContent = `${score} / ${maxScore}`;
+        document.getElementById('summary-threshold').textContent = passingScore;
+        document.getElementById('summary-correct').textContent = correctCount;
+        document.getElementById('summary-wrong').textContent = wrongCount;
+        
+        const badge = document.getElementById('summary-status-badge');
+        const title = document.getElementById('summary-status-title');
+        const subtitle = document.getElementById('summary-status-subtitle');
+        
+        if (isPassed) {
+            badge.className = 'w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6 border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.3)]';
+            badge.innerHTML = '<span class="material-symbols-outlined text-4xl">check_circle</span>';
+            title.className = 'text-3xl font-display font-extrabold mb-1 text-emerald-400';
+            title.textContent = 'LULUS';
+            subtitle.textContent = 'Selamat! Nilai Anda memenuhi ambang batas kelulusan.';
+        } else {
+            badge.className = 'w-20 h-20 rounded-full bg-error/20 text-error flex items-center justify-center mb-6 border border-error/30 shadow-[0_0_20px_rgba(239,68,68,0.3)]';
+            badge.innerHTML = '<span class="material-symbols-outlined text-4xl">cancel</span>';
+            title.className = 'text-3xl font-display font-extrabold mb-1 text-error';
+            title.textContent = 'TIDAK LULUS';
+            subtitle.textContent = 'Tetap semangat! Nilai Anda belum memenuhi ambang batas kelulusan.';
+        }
+        
+        // Save to history list
+        let historyData = localStorage.getItem('userTryoutHistory');
+        let history = historyData ? JSON.parse(historyData) : [];
+        history.unshift({
+            date: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}),
+            category: activeQuizCategory,
+            score: score,
+            maxScore: maxScore,
+            correct: correctCount,
+            wrong: wrongCount,
+            passed: isPassed
+        });
+        localStorage.setItem('userTryoutHistory', JSON.stringify(history));
+        
+        // Show modal
+        const summaryModal = document.getElementById('summary-modal');
+        summaryModal.classList.add('show');
+    }
+
+    // Initialize Grid on load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTimerDisplay();
+        renderQuestionGrid();
+        updateQuestionDisplay();
+    });
+</script>
+
+
+</body></html>

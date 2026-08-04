@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="id" class="dark"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+    try {
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-tint": "#FF9500",
+              "surface-bright": "#1c1c1e",
+              "on-primary-container": "#000000",
+              "error": "#ff453a",
+              "on-secondary-fixed-variant": "#d8e2ff",
+              "on-tertiary": "#000000",
+              "secondary-fixed-dim": "#c2c1ff",
+              "on-tertiary-fixed-variant": "#ffdbcc",
+              "primary-fixed": "#ff9500",
+              "on-primary-fixed": "#000000",
+              "inverse-on-surface": "#1a1b1f",
+              "outline": "#8e8e93",
+              "on-tertiary-fixed": "#351000",
+              "secondary": "#5e5ce6",
+              "surface-container-high": "#2c2c2e",
+              "primary": "#FF9500",
+              "background": "#000000",
+              "primary-fixed-dim": "#ffb340",
+              "surface-container": "#1c1c1e",
+              "on-error": "#000000",
+              "tertiary-container": "#c64f00",
+              "on-tertiary-container": "#fffbff",
+              "secondary-fixed": "#e2dfff",
+              "on-secondary": "#ffffff",
+              "error-container": "#4a0005",
+              "primary-container": "#FF9500",
+              "tertiary-fixed-dim": "#ffb595",
+              "inverse-surface": "#e3e2e7",
+              "surface-variant": "#3a3a3c",
+              "inverse-primary": "#0058bc",
+              "on-surface": "#ffffff",
+              "on-primary-fixed-variant": "#004493",
+              "surface-container-highest": "#3a3a3c",
+              "tertiary": "#ff9f0a",
+              "on-background": "#ffffff",
+              "surface-container-low": "#0e0e10",
+              "surface": "#000000",
+              "surface-container-lowest": "#000000",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#48484a",
+              "on-primary": "#000000",
+              "on-secondary-container": "#fffbff",
+              "on-secondary-fixed": "#0c006a",
+              "on-surface-variant": "#a1a1aa",
+              "secondary-container": "#5e5ce6",
+              "tertiary-fixed": "#ffdbcc",
+              "surface-dim": "#1c1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "stack-lg": "48px",
+              "stack-sm": "12px",
+              "container-padding-desktop": "40px",
+              "unit": "8px",
+              "stack-md": "24px",
+              "gutter": "24px",
+              "container-padding-mobile": "20px"
+            },
+            "fontFamily": {
+              "headline-lg-mobile": ["Inter"],
+              "headline-lg": ["Inter"],
+              "display": ["Inter"],
+              "body-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "label-caps": ["Inter"],
+              "title-md": ["Inter"]
+            },
+            "fontSize": {
+              "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+              "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+              "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+              "body-lg": ["17px", {"lineHeight": "1.5", "fontWeight": "400"}],
+              "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    } catch (_e) {}
+  }catch(_e){}</script>
+<style id="page-transition">
+
+  /* Smooth Page transition */
+  body {
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  body.page-fade-in {
+    opacity: 1;
+  }
+  body.page-fade-out {
+    opacity: 0;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .accordion-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+  }
+  .accordion-wrapper.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .accordion-inner {
+    overflow: hidden;
+  }
+</style>
+
+
+</head><body class="text-on-background font-body-lg min-h-screen relative bg-background overflow-y-scroll">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-desktop py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-[0_20px_40px_rgba(0,0,0,0.2)] hidden md:flex">
+<div class="flex items-center gap-4">
+<a href="index.html" class="font-display text-display text-primary tracking-tighter hover:opacity-80 transition-opacity" style="font-size: 24px;">Ruang ASN</a>
+</div>
+<div class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="index.html">Belajar</a>
+
+<a class="font-label-caps text-label-caps text-primary font-semibold hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Riwayat</a>
+
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="database-soal.html">Database</a>
+</div>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</nav>
+<!-- Mobile Header -->
+<header class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-mobile py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 md:hidden">
+<a href="index.html" class="font-display text-primary tracking-tighter text-xl font-bold hover:opacity-80 transition-opacity">Ruang ASN</a>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-32 px-container-padding-mobile md:px-container-padding-desktop max-w-[1200px] mx-auto w-full">
+
+<!-- Page Title -->
+<div class="mb-12 text-center md:text-left">
+<h1 class="font-display text-display md:text-display text-glow mb-4 text-primary-container">Riwayat Belajar</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl font-body-md">Tinjau kembali perjalanan Anda menuju abdi negara sejati. Setiap kegagalan adalah pelajaran, setiap kemenangan adalah langkah pasti.</p>
+</div>
+
+<!-- Stats Grid Removed -->
+
+<!-- Filters -->
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+    <div id="filter-buttons" class="flex bg-surface-container-low rounded-full border border-primary/20 w-full md:w-auto p-1">
+        <button class="px-4 py-1.5 rounded-full font-label-caps text-black bg-primary shadow-[0_0_15px_rgba(255,149,0,0.4)] text-[11px]">Semua Arena</button>
+        <button class="px-4 py-1.5 rounded-full font-label-caps text-on-surface-variant hover:text-primary transition-colors text-[11px]">TIU</button>
+        <button class="px-4 py-1.5 rounded-full font-label-caps text-on-surface-variant hover:text-primary transition-colors text-[11px]">TWK</button>
+        <button class="px-4 py-1.5 rounded-full font-label-caps text-on-surface-variant hover:text-primary transition-colors text-[11px]">TKP</button>
+    </div>
+    
+    <div class="flex items-center gap-2 w-full md:w-auto">
+        <button id="clear-history-btn" class="px-4 py-2.5 bg-error/10 text-error rounded-full font-bold text-xs hover:bg-error/20 transition-all border border-error/30 uppercase tracking-widest" onclick="clearHistory()">Hapus Semua Riwayat</button>
+        <div class="relative w-full md:w-64">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">search</span>
+            <input class="w-full bg-surface-container-low border border-primary/30 rounded-full py-2.5 pl-11 pr-4 text-body-sm focus:outline-none focus:border-primary shadow-[inset_0_0_10px_rgba(255,149,0,0.05)] transition-all text-on-surface placeholder:text-on-surface-variant/50" placeholder="Cari tanggal atau arena..." type="text">
+        </div>
+    </div>
+</div>
+
+<!-- History Table / Cards -->
+<div class="glass-card rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-primary/20">
+    <table class="w-full text-left border-collapse">
+        <thead class="bg-primary/5 border-b border-primary/20">
+            <tr>
+                <th class="px-8 py-5 font-label-caps text-primary uppercase tracking-[0.15em] text-[11px] font-black">Tanggal</th>
+                <th class="px-8 py-5 font-label-caps text-primary uppercase tracking-[0.15em] text-[11px] font-black">Kategori Test</th>
+<th class="px-8 py-5 font-label-caps text-primary uppercase tracking-[0.15em] text-[11px] font-black">Jawaban Benar</th>
+                <th class="px-8 py-5 font-label-caps text-primary uppercase tracking-[0.15em] text-[11px] font-black">Skor</th>
+                <th class="px-8 py-5 font-label-caps text-primary uppercase tracking-[0.15em] text-[11px] font-black">Batas Lulus</th>
+                <th class="px-8 py-5 font-label-caps text-primary uppercase tracking-[0.15em] text-[11px] font-black">Status Kelulusan</th>
+            </tr>
+        </thead>
+        <tbody id="history-table-body" class="divide-y divide-primary/10">
+        </tbody>
+    </table>
+</div>
+
+</main>
+<!-- BottomNavBar Mobile -->
+<nav class="fixed bottom-0 w-full z-[200] bg-background/80 backdrop-blur-xl border-t border-white/5 shadow-[0_-4px_20px_rgba(0,0,0,0.4)] md:hidden pb-safe flex justify-around items-center h-16 px-4">
+<a class="flex flex-col items-center justify-center w-16 text-on-surface-variant hover:text-white" href="index.html">\n<span class="material-symbols-outlined" style="font-variation-settings: \'FILL\' 1;">book</span>\n<span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Belajar</span>\n</a>
+<a class="flex flex-col items-center justify-center w-16 text-on-surface-variant hover:text-white" href="#">
+</a></nav>
+
+<script>
+    function toggleArena(contentId, iconId) {
+        const arenas = [
+            { content: 'tiu-content', icon: 'tiu-icon' },
+            { content: 'twk-content', icon: 'twk-icon' },
+            { content: 'tkp-content', icon: 'tkp-icon' }
+        ];
+
+        arenas.forEach(arena => {
+            if (arena.content !== contentId) {
+                document.getElementById(arena.content).classList.remove('open');
+                document.getElementById(arena.icon).style.transform = 'rotate(0deg)';
+            }
+        });
+
+        const content = document.getElementById(contentId);
+        const icon = document.getElementById(iconId);
+        if (!content.classList.contains('open')) {
+            content.classList.add('open');
+            icon.style.transform = 'rotate(180deg)';
+        } else {
+            content.classList.remove('open');
+            icon.style.transform = 'rotate(0deg)';
+        }
+    }
+
+    function updateUIState() {
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        document.querySelectorAll('.auth-login-btn').forEach(btn => {
+            btn.style.display = isLoggedIn ? 'none' : 'block';
+        });
+        document.querySelectorAll('.auth-profile-pic').forEach(pic => {
+            pic.style.display = isLoggedIn ? 'block' : 'none';
+        });
+    }
+    document.addEventListener('DOMContentLoaded', updateUIState);
+</script>
+<!-- Atmospheric Glows -->
+    <div class="fixed top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-1/4 right-1/4 w-[300px] h-[300px] bg-tertiary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+    <script class="">
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+<!-- Atmospheric Glows -->
+    <div class="fixed top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-1/4 right-1/4 w-[300px] h-[300px] bg-tertiary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+    <script class="">
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+<script id="smooth-transitions">
+document.addEventListener("DOMContentLoaded", () => {
+    // Add page fade-in class
+    document.body.classList.add("page-fade-in");
+    
+    // Intercept link clicks for page fade-out
+    document.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (href && href.endsWith(".html") && !href.startsWith("http") && !link.target && href !== "#") {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.body.classList.add("page-fade-out");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        }
+    });
+});
+</script>
+
+<script>
+    function renderHistoryTable(filter = 'SEMUA ARENA') {
+        const tableBody = document.getElementById('history-table-body');
+        let historyData = localStorage.getItem('userTryoutHistory');
+        let history = historyData ? JSON.parse(historyData) : [];
+        
+        let html = '';
+        if (history.length === 0) {
+            html = '<tr><td colspan="6" class="px-8 py-10 text-center text-on-surface-variant">Belum ada riwayat belajar.</td></tr>';
+        } else {
+            let filteredHistory = history;
+            if (filter !== 'SEMUA ARENA') {
+                filteredHistory = history.filter(item => item.category.toUpperCase().includes(filter));
+            }
+            
+            if (filteredHistory.length === 0) {
+                html = '<tr><td colspan="6" class="px-8 py-10 text-center text-on-surface-variant">Tidak ada riwayat untuk kategori ini.</td></tr>';
+            } else {
+                filteredHistory.forEach(item => {
+                    let icon = 'psychology';
+                    if (item.category === 'TWK') icon = 'public';
+                    if (item.category === 'TKP') icon = 'groups';
+                    
+                    let passStatusHtml = item.passed 
+                        ? `<span class="font-label-caps flex items-center gap-2 text-green-400 font-black"><span class="w-2.5 h-2.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse"></span>LULUS</span>`
+                        : `<span class="font-label-caps flex items-center gap-2 text-error font-black"><span class="w-2.5 h-2.5 rounded-full bg-error shadow-[0_0_8px_#ef4444] animate-pulse"></span>GAGAL</span>`;
+                        
+                    let passingGrade = item.category === 'TIU' ? 80 : (item.category === 'TWK' ? 65 : 166);
+                    
+                    html += `<tr class="hover:bg-primary/5 transition-colors group">
+                        <td class="px-8 py-6">
+                            <div class="flex flex-col">
+                                <span class="font-title-md text-on-surface">${item.date}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">${icon}</span>
+                                </div>
+                                <span class="font-body-sm font-bold text-on-surface">${item.category}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6">
+                            <span class="font-title-md text-on-surface font-bold">${item.correct || 0} / ${(item.correct || 0) + (item.wrong || 0)}</span>
+                        </td>
+                        <td class="px-8 py-6">
+                            <div class="flex flex-col">
+                                <span class="text-headline-lg-mobile text-white font-black ">${item.score}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6">
+                            <span class="font-title-md text-on-surface font-bold">${passingGrade}</span>
+                        </td>
+                        <td class="px-8 py-6">
+                            ${passStatusHtml}
+                        </td>
+                    </tr>`;
+                });
+            }
+        }
+        tableBody.innerHTML = html;
+    }
+
+    function clearHistory() {
+        if(confirm("Apakah Anda yakin ingin menghapus semua riwayat belajar?")) {
+            localStorage.removeItem('userTryoutHistory');
+            renderHistoryTable(window.currentHistoryFilter || 'SEMUA ARENA');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        window.currentHistoryFilter = 'SEMUA ARENA';
+        renderHistoryTable();
+
+        const filterContainer = document.getElementById('filter-buttons');
+        if (!filterContainer) return;
+        const buttons = filterContainer.querySelectorAll('button');
+
+        const activeClasses = ['text-black', 'bg-primary', 'shadow-[0_0_15px_rgba(255,149,0,0.4)]'];
+        const inactiveClasses = ['text-on-surface-variant', 'hover:text-primary', 'transition-colors'];
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(btn => {
+                    btn.classList.remove(...activeClasses);
+                    btn.classList.add(...inactiveClasses);
+                });
+                button.classList.remove(...inactiveClasses);
+                button.classList.add(...activeClasses);
+
+                window.currentHistoryFilter = button.textContent.trim().toUpperCase();
+                renderHistoryTable(window.currentHistoryFilter);
+            });
+        });
+    });
+</script>
+
+</body></html>

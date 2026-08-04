@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Ruang ASN</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500&amp;family=Geist:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "on-error": "#690005",
+                            "surface-tint": "#ffb874",
+                            "on-secondary-fixed": "#1b1b1d",
+                            "secondary-fixed-dim": "#c8c6c8",
+                            "error-container": "#93000a",
+                            "tertiary-container": "#81b0ff",
+                            "on-primary-fixed": "#2d1600",
+                            "surface-bright": "#39393b",
+                            "outline-variant": "#554334",
+                            "surface-container-low": "#1b1b1d",
+                            "on-surface-variant": "#dbc2ad",
+                            "on-primary-fixed-variant": "#6a3b00",
+                            "on-primary": "#4b2800",
+                            "on-error-container": "#ffdad6",
+                            "primary-fixed": "#ffdcbf",
+                            "secondary": "#c8c6c8",
+                            "on-secondary-fixed-variant": "#474649",
+                            "on-tertiary": "#003064",
+                            "on-background": "#e4e2e4",
+                            "surface-dim": "#131315",
+                            "surface-container-lowest": "#0e0e10",
+                            "secondary-container": "#474649",
+                            "primary-fixed-dim": "#ffb874",
+                            "on-surface": "#e4e2e4",
+                            "tertiary-fixed": "#d6e3ff",
+                            "inverse-primary": "#8c5000",
+                            "surface": "#131315",
+                            "on-primary-container": "#643700",
+                            "surface-container-high": "#2a2a2c",
+                            "inverse-on-surface": "#303032",
+                            "inverse-surface": "#e4e2e4",
+                            "on-secondary": "#303032",
+                            "error": "#ffb4ab",
+                            "surface-variant": "#353437",
+                            "on-tertiary-fixed": "#001b3e",
+                            "on-tertiary-fixed-variant": "#00468d",
+                            "on-secondary-container": "#b6b4b7",
+                            "surface-container-highest": "#353437",
+                            "surface-container": "#1f1f21",
+                            "tertiary": "#b0cbff",
+                            "outline": "#a38d7a",
+                            "on-tertiary-container": "#004185",
+                            "primary-container": "#ff9500",
+                            "tertiary-fixed-dim": "#aac7ff",
+                            "primary": "#ffbd7f",
+                            "background": "#000000",
+                            "secondary-fixed": "#e4e2e4"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "unit": "8px",
+                            "gutter": "16px",
+                            "container-margin": "24px",
+                            "section-gap": "64px"
+                        },
+                        "fontFamily": {
+                            "headline-lg-mobile": ["Plus Jakarta Sans"],
+                            "caption": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "display": ["Plus Jakarta Sans"],
+                            "label-md": ["Geist"],
+                            "body-md": ["Inter"],
+                            "headline-md": ["Plus Jakarta Sans"],
+                            "headline-lg": ["Plus Jakarta Sans"]
+                        },
+                        "fontSize": {
+                            "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                            "caption": ["12px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                            "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                        }
+                    },
+                },
+            }
+        } catch (_e) {}
+    </script>
+<style>
+        .glass-card {
+            background: rgba(31, 31, 33, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 189, 127, 0.1);
+        }
+    </style>
+<script>
+    if (window.performance) {
+        var navEntries = performance.getEntriesByType("navigation");
+        if (navEntries.length > 0 && navEntries[0].type === "reload") {
+            window.location.replace("index.html");
+        } else if (performance.navigation && performance.navigation.type === 1) {
+            window.location.replace("index.html");
+        }
+    }
+</script>
+
+<script id="reload-redirect">
+    // Redirect to main menu on page reload
+    if (performance.getEntriesByType("navigation").length > 0) {
+        if (performance.getEntriesByType("navigation")[0].type === "reload") {
+            const currentPage = window.location.pathname.split('/').pop();
+            if (currentPage !== 'index.html' && currentPage !== '') {
+                window.location.href = 'index.html';
+            }
+        }
+    }
+</script>
+<style id="page-transition">
+
+  /* Smooth Page transition */
+  body {
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  body.page-fade-in {
+    opacity: 1;
+  }
+  body.page-fade-out {
+    opacity: 0;
+  }
+
+</style>
+</head>
+<body class="font-body-md text-on-surface bg-background min-h-screen flex flex-col overflow-hidden overflow-y-scroll">
+<main class="flex-grow flex relative z-10">
+<div class="w-full h-full flex flex-col md:flex-row">
+<!-- Left Side: Brand Title -->
+<div class="w-full md:w-1/2 flex items-center justify-center p-container-margin md:p-12">
+<div class="max-w-xl animate-in slide-in-from-left duration-1000">
+<h1 class="font-display text-[clamp(2.5rem,8vw,5rem)] font-bold text-primary tracking-tighter leading-none drop-shadow-[0_0_30px_rgba(255,189,127,0.3)]">
+                    Ruang ASN
+                </h1>
+<p class="mt-6 text-body-lg text-on-surface-variant max-w-md opacity-80">
+                    Enter the high-stakes world of bureaucratic strategy and administrative dominance.
+                </p>
+</div>
+</div>
+<!-- Right Side: Login Card -->
+<div class="w-full md:w-1/2 flex items-center justify-center p-container-margin">
+<div class="glass-card w-full max-w-md p-10 rounded-xl animate-in fade-in zoom-in duration-700">
+<div class="mb-8">
+<h2 class="font-display text-headline-lg font-bold mb-2 tracking-tight">Welcome Back</h2>
+<p class="text-on-surface-variant font-body-md">Access your administrative dominion.</p>
+</div>
+<!-- Form -->
+<form class="space-y-4 mb-8" onsubmit="event.preventDefault(); localStorage.setItem('isLoggedIn', 'true'); window.location.href='index.html';">
+<div class="space-y-2">
+<label class="block text-caption font-label-md text-on-surface-variant uppercase tracking-widest ml-1">Email or Username</label>
+<input class="w-full bg-surface-container-low/50 border border-surface-variant/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary transition-all" placeholder="Enter your credentials" type="text" value="Wahyudha" required/>
+</div>
+<div class="space-y-2">
+<label class="block text-caption font-label-md text-on-surface-variant uppercase tracking-widest ml-1">Password</label>
+<input class="w-full bg-surface-container-low/50 border border-surface-variant/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary transition-all" placeholder="••••••••" type="password" required/>
+</div>
+<button class="w-full bg-primary text-on-primary-container font-bold py-3 px-4 rounded-lg hover:bg-surface-tint transition-all active:scale-95 duration-200 mt-4 shadow-[0_0_20px_rgba(255,184,116,0.2)]" type="submit">Log In</button>
+</form>
+<!-- Divider -->
+<div class="flex items-center gap-4 mb-8">
+<div class="flex-grow h-px bg-surface-variant/30"></div>
+<span class="text-caption font-label-md text-on-surface-variant uppercase tracking-widest text-[10px]">Secure Authentication</span>
+<div class="flex-grow h-px bg-surface-variant/30"></div>
+</div>
+<!-- Social Auth -->
+<div class="space-y-3">
+<button onclick="localStorage.setItem('isLoggedIn', 'true'); window.location.href='index.html';" class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-white text-black font-semibold hover:bg-neutral-200 transition-all active:scale-95 duration-200">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                        Continue with Google
+                    </button>
+<button onclick="localStorage.setItem('isLoggedIn', 'true'); window.location.href='index.html';" class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-black text-white border border-surface-variant/50 font-semibold hover:bg-neutral-900 transition-all active:scale-95 duration-200">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M17.05 20.28c-.96.95-2.04 1.72-3.35 1.72-1.25 0-1.63-.78-3.13-.78-1.52 0-1.95.76-3.13.76-1.27 0-2.39-.81-3.41-1.84-2.11-2.11-3.23-5.32-3.23-8.08 0-3.32 2.1-5.06 4.14-5.06 1.03 0 2 .61 2.62.61.6 0 1.68-.74 2.89-.74 1.1 0 2.21.41 3.01 1.25-2.34 1.34-1.95 4.67.4 5.64-1 2.37-2.18 4.66-4.24 6.52zM12.91 3.51c-.13-1.74-1.6-3.2-3.26-3.15-.22 1.83 1.5 3.39 3.26 3.15z"></path>
+</svg>
+                        Continue with Apple
+                    </button>
+</div>
+<!-- Footer Link -->
+<div class="mt-8 text-center text-body-md">
+<span class="text-on-surface-variant">Don't have an account?</span>
+<a class="text-primary font-semibold hover:underline ml-1" href="#">Sign Up</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Identity -->
+<footer class="w-full py-6 px-container-margin flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/5 relative z-20 bg-background/80 backdrop-blur-sm">
+<div class="font-caption text-caption text-on-secondary-container">
+        © 2024 Ruang ASN. All Rights Reserved.
+    </div>
+<div class="flex gap-6">
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary transition-colors" href="#">Rules of Engagement</a>
+</div>
+</footer>
+<script id="smooth-transitions">
+document.addEventListener("DOMContentLoaded", () => {
+    // Add page fade-in class
+    document.body.classList.add("page-fade-in");
+    
+    // Intercept link clicks for page fade-out
+    document.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (href && href.endsWith(".html") && !href.startsWith("http") && !link.target && href !== "#") {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.body.classList.add("page-fade-out");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        }
+    });
+});
+</script>
+</body></html>

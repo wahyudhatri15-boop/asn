@@ -1,0 +1,490 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ruang ASN - Arena</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#e3e2e7",
+            "inverse-primary": "#8c5000",
+            "primary-container": "#ff9500",
+            "tertiary-container": "#f79900",
+            "surface-tint": "#ffb874",
+            "surface-variant": "#3A3A3C",
+            "surface-container-lowest": "#0d0e12",
+            "on-tertiary-fixed": "#2b1700",
+            "surface-container": "#1e1f23",
+            "secondary": "#c2c1ff",
+            "tertiary-fixed-dim": "#ffb868",
+            "surface": "#121317",
+            "on-secondary": "#1800a7",
+            "primary": "#FF9500",
+            "secondary-container": "#3630bf",
+            "secondary-fixed-dim": "#c2c1ff",
+            "surface-container-highest": "#343539",
+            "on-tertiary-container": "#603900",
+            "on-error": "#690005",
+            "inverse-on-surface": "#2f3034",
+            "outline": "#a38d7a",
+            "tertiary-fixed": "#ffddbb",
+            "primary-fixed-dim": "#ffb874",
+            "error": "#FF453A",
+            "glass-border": "rgba(255, 255, 255, 0.1)",
+            "background": "#000000",
+            "secondary-fixed": "#e2dfff",
+            "surface-dim": "#121317",
+            "surface-bright": "#38393d",
+            "outline-variant": "#554334",
+            "surface-container-low": "#1a1b1f",
+            "on-secondary-fixed": "#0c006b",
+            "on-primary-fixed-variant": "#6a3b00",
+            "on-primary": "#4b2800",
+            "on-tertiary": "#482900",
+            "on-primary-fixed": "#2d1600",
+            "on-secondary-container": "#b1b1ff",
+            "inverse-surface": "#e3e2e7",
+            "on-surface-variant": "#dbc2ad",
+            "tertiary": "#ffbd73",
+            "primary-fixed": "#ffdcbf",
+            "error-container": "#93000a",
+            "on-error-container": "#ffdad6",
+            "surface-container-high": "#292a2e",
+            "on-tertiary-fixed-variant": "#673d00",
+            "on-background": "#e3e2e7",
+            "on-primary-container": "#643700",
+            "on-secondary-fixed-variant": "#332dbc"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "container-padding-mobile": "20px",
+            "unit": "8px",
+            "container-padding-desktop": "40px",
+            "stack-sm": "12px",
+            "stack-md": "24px",
+            "stack-lg": "48px"
+          },
+          "fontFamily": {
+            "label-caps": ["Inter"],
+            "display": ["Inter"],
+            "headline-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "label-tiny": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "label-tiny": ["10px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+            "body-sm": ["14px", { "lineHeight": "1.4", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+            "body-lg": ["17px", { "lineHeight": "1.5", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #000000;
+      color: #e3e2e7;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .glass-card {
+      background: rgba(30, 31, 35, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 184, 116, 0.3);
+      border-radius: 10px;
+    }
+    
+    .glow-primary {
+      box-shadow: 0 0 20px rgba(255, 149, 0, 0.15);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<style id="page-transition">
+
+  /* Smooth Page transition */
+  body {
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  body.page-fade-in {
+    opacity: 1;
+  }
+  body.page-fade-out {
+    opacity: 0;
+  }
+
+</style>
+</head>
+<body class="h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-desktop py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-[0_20px_40px_rgba(0,0,0,0.2)] hidden md:flex">
+<div class="flex items-center gap-4">
+<a href="index.html" class="font-display text-display text-primary tracking-tighter hover:opacity-80 transition-opacity" style="font-size: 24px;">Ruang ASN</a>
+</div>
+<div class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="index.html">Belajar</a>
+
+<a class="font-label-caps text-label-caps text-primary font-semibold hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="history.html">Riwayat</a>
+
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="database-soal.html">Database</a>
+</div>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</nav>
+<!-- Mobile Header -->
+<header class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-mobile py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 md:hidden">
+<a href="index.html" class="font-display text-primary tracking-tighter text-xl font-bold hover:opacity-80 transition-opacity">Ruang ASN</a>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-1 mt-16 p-6 max-w-[1440px] mx-auto w-full grid grid-cols-12 gap-6 overflow-hidden">
+<!-- LEFT COLUMN: Question & Options -->
+<section class="col-span-12 lg:col-span-5 flex flex-col gap-4 overflow-hidden">
+<div class="glass-card rounded-xl p-8 h-full flex flex-col">
+<div class="mb-6">
+<span id="question-header" class="font-label-caps text-label-caps text-primary tracking-widest uppercase" style="color: rgb(255, 149, 0);">Question 01 / 50</span>
+<h1 id="question-text" class="text-on-surface mt-2 leading-snug text-sm">Dalam rangka menghormati umat beragama lain saat merayakan hari rayanya, sikap yang paling sesuai dengan pengamalan sila pertama Pancasila adalah...</h1>
+</div>
+<div id="options-container" class="space-y-3 flex-1 overflow-y-auto custom-scrollbar pr-1">
+<!-- Option A -->
+<button class="w-full text-left group transition-all duration-200">
+<div class="glass-card border-white/5 hover:border-primary/50 hover:bg-primary/5 group-active:scale-[0.98] rounded-xl flex items-start gap-4 transition-all p-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 group-hover:border-primary/40 text-on-surface-variant group-hover:text-primary font-bold text-sm">A</div>
+<p class="text-on-surface-variant group-hover:text-on-surface pt-1 text-sm">Mengucapkan selamat dan ikut bergembira dalam suasana hari raya bersama pemeluk agama lain</p>
+</div>
+</button>
+<!-- Option B -->
+<button class="w-full text-left group transition-all duration-200">
+<div class="glass-card border-white/5 hover:border-primary/50 hover:bg-primary/5 group-active:scale-[0.98] rounded-xl flex items-start gap-4 transition-all p-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 group-hover:border-primary/40 text-on-surface-variant group-hover:text-primary font-bold text-sm">B</div>
+<p class="text-on-surface-variant group-hover:text-on-surface pt-1 text-sm">Membantu menjaga ketertiban lingkungan agar perayaan berjalan aman dan lancar</p>
+</div>
+</button>
+<!-- Option C (Selected State) -->
+<button class="w-full text-left group transition-all duration-200">
+<div class="bg-primary/10 border-primary/60 glow-primary rounded-xl flex items-start gap-4 border transition-all p-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-sm">C</div>
+<p class="text-on-surface pt-1 text-sm">Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya</p>
+</div>
+</button>
+<!-- Option D -->
+<button class="w-full text-left group transition-all duration-200">
+<div class="glass-card border-white/5 hover:border-primary/50 hover:bg-primary/5 group-active:scale-[0.98] rounded-xl flex items-start gap-4 transition-all p-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 group-hover:border-primary/40 text-on-surface-variant group-hover:text-primary font-bold text-sm">D</div>
+<p class="text-on-surface-variant group-hover:text-on-surface pt-1 text-sm">Menghargai perayaan dengan tidak menampilkan identitas agama sendiri demi menghindari perbedaan</p>
+</div>
+</button>
+<!-- Option E -->
+<button class="w-full text-left group transition-all duration-200">
+<div class="glass-card border-white/5 hover:border-primary/50 hover:bg-primary/5 group-active:scale-[0.98] rounded-xl flex items-start gap-4 transition-all p-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 group-hover:border-primary/40 text-on-surface-variant group-hover:text-primary font-bold text-sm">E</div>
+<p class="text-on-surface-variant group-hover:text-on-surface pt-1 text-sm">Menyambut perayaan dengan ikut serta dalam ritual doa agama lain sebagai wujud kebersamaan</p>
+</div>
+</button>
+</div>
+<div class="mt-8 flex justify-between gap-4">
+<button id="btn-prev" class="flex-1 py-4 px-6 rounded-xl border border-white/10 font-label-caps text-label-caps text-on-surface-variant hover:bg-white/5 transition-all flex items-center justify-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined">chevron_left</span> SEBELUMNYA
+          </button>
+<button id="btn-next" class="flex-1 py-4 px-6 rounded-xl bg-primary text-on-primary font-label-caps text-label-caps hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20 cursor-pointer" style="background-color: rgb(255, 149, 0);">
+            SELANJUTNYA <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- CENTER COLUMN: Discussion/Pembahasan -->
+<section class="col-span-12 lg:col-span-5 flex flex-col overflow-hidden">
+<div class="glass-card rounded-xl p-8 h-full flex flex-col relative overflow-hidden">
+<!-- Background Glow -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 blur-[100px] pointer-events-none"></div>
+<div class="flex items-center justify-between mb-6">
+
+<h2 class="font-title-md text-primary tracking-wide uppercase" style="color: rgb(255, 149, 0);">Pembahasan</h2>
+<div class="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-lg border border-primary/30"><span class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Kunci:</span><span id="kunci-jawaban" class="font-bold text-primary">C</span></div></div>
+<div class="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-6">
+
+<div class="space-y-4">
+<p id="pembahasan-text" class="text-on-surface leading-relaxed text-sm">Sila pertama, "Ketuhanan Yang Maha Esa," menekankan pada kebebasan beragama dan toleransi antar umat beragama.</p>
+
+
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: Navigator -->
+<section class="col-span-12 lg:col-span-2 flex flex-col gap-4 overflow-hidden">
+<!-- Question Grid Card -->
+<div class="glass-card rounded-xl flex flex-col overflow-hidden p-3">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">SOAL</h3>
+<span id="question-badge" class="text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded">1/50</span>
+</div>
+<div class="overflow-y-auto custom-scrollbar pr-1">
+<div class="grid gap-1 grid-cols-5" id="navigator-grid">
+</div>
+</div>
+<button onclick="window.location.href='history.html'" class="mt-4 w-full py-3 rounded-lg border border-error/30 text-error font-label-caps text-[10px] hover:bg-error/10 transition-all flex items-center justify-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">logout</span> AKHIRI
+</button>
+</div>
+</section>
+</main>
+<!-- Mobile Bottom Nav -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 md:hidden bg-surface-container/90 backdrop-blur-2xl border-t border-glass-border">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-tiny text-label-tiny">Learn</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 scale-110 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swords</span>
+<span class="font-label-tiny text-label-tiny">Arena</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-tiny text-label-tiny">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-tiny text-label-tiny">Profile</span>
+</div>
+</footer>
+<!-- Micro-interactions & Effects -->
+<script>
+    let currentQ = 1;
+    
+
+    
+    let defaultQuestions = [
+    {
+        "q": "Dalam rangka menghormati umat beragama lain saat merayakan hari rayanya, sikap yang paling sesuai dengan pengamalan sila pertama Pancasila adalah...",
+        "options": [
+            "Mengucapkan selamat dan ikut bergembira dalam suasana hari raya bersama pemeluk agama lain",
+            "Membantu menjaga ketertiban lingkungan agar perayaan berjalan aman dan lancar",
+            "Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya",
+            "Menghargai perayaan dengan tidak menampilkan identitas agama sendiri demi menghindari perbedaan",
+            "Menyambut perayaan dengan ikut serta dalam ritual doa agama lain sebagai wujud kebersamaan"
+        ],
+        "a": "Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya",
+        "key": "C",
+        "pembahasan": "Sila pertama, 'Ketuhanan Yang Maha Esa,' menekankan pada kebebasan beragama dan toleransi antar umat beragama tanpa mencampuri ritual keagamaan masing-masing."
+    },
+    {
+        "q": "Integritas nasional merupakan pondasi penting dalam menjaga keutuhan NKRI. Salah satu wujud nyata dari sikap integritas sebagai seorang ASN adalah...",
+        "options": [
+            "Menolak segala bentuk gratifikasi dan melaporkannya sesuai prosedur hukum yang berlaku",
+            "Mengutamakan kepentingan kelompok tertentu yang memberikan dukungan politik",
+            "Memanfaatkan fasilitas kantor untuk kepentingan pribadi dalam batas wajar",
+            "Menerima imbalan tambahan atas pelayanan publik yang cepat dan memuaskan",
+            "Menyimpan informasi publik yang wajib dibuka demi pertimbangan subjektif"
+        ],
+        "a": "Menolak segala bentuk gratifikasi dan melaporkannya sesuai prosedur hukum yang berlaku",
+        "key": "A",
+        "pembahasan": "Menolak segala bentuk gratifikasi dan berani melaporkannya adalah nilai utama dari integritas seorang Aparatur Sipil Negara."
+    },
+    {
+        "q": "Semua mahasiswa psikologi memelajari perilaku manusia. Sebagian orang yang memelajari perilaku manusia menjadi konselor yang sukses. Kesimpulan yang benar adalah...",
+        "options": [
+            "Semua mahasiswa psikologi pasti menjadi konselor yang sukses",
+            "Sebagian mahasiswa psikologi mungkin menjadi konselor yang sukses",
+            "Tidak ada mahasiswa psikologi yang menjadi konselor sukses",
+            "Semua konselor yang sukses adalah mahasiswa psikologi",
+            "Orang yang bukan mahasiswa psikologi tidak bisa menjadi konselor"
+        ],
+        "a": "Sebagian mahasiswa psikologi mungkin menjadi konselor yang sukses",
+        "key": "B",
+        "pembahasan": "Karena sebagian pemelajar perilaku manusia menjadi konselor sukses, maka sebagian mahasiswa psikologi (yang juga memelajari perilaku manusia) mungkin menjadi konselor yang sukses."
+    }
+];
+    let activeQuizCategory = localStorage.getItem('selectedCategory') || 'TWK';
+    let dbKey = activeQuizCategory.toLowerCase() + 'DB_level1';
+    let saved = localStorage.getItem(dbKey);
+    let sampleQuestions = defaultQuestions;
+    if (saved && saved !== '[]') {
+        let parsed = JSON.parse(saved);
+        // map db format to pembahasan format
+        sampleQuestions = parsed.map(p => ({
+            q: p.q || p.question,
+            options: p.options || [],
+            key: p.key || (p.a === p.options?.[0] ? 'A' : p.a === p.options?.[1] ? 'B' : p.a === p.options?.[2] ? 'C' : p.a === p.options?.[3] ? 'D' : 'E'),
+            explanation: p.pembahasan || ''
+        }));
+    }
+    const totalQ = sampleQuestions.length || 50;
+
+    function renderQuestion(num) {
+      currentQ = num;
+      const numStr = String(num).padStart(2, '0');
+      document.getElementById('question-header').textContent = `Question ${numStr} / ${totalQ}`;
+      document.getElementById('question-badge').textContent = `${num}/${totalQ}`;
+
+      let qData = sampleQuestions[(num - 1) % sampleQuestions.length];
+      if (num > sampleQuestions.length) {
+        const keys = ['A', 'B', 'C', 'D', 'E'];
+        const k = keys[(num * 3) % 5];
+        qData = {
+          q: `Soal nomor ${num}: Manakah dari pilihan berikut yang merupakan penerapan prinsip efisiensi dan transparansi dalam tata kelola pelayanan publik?`,
+          options: [
+            `Digitalisasi layanan tanpa biaya tambahan (Pilihan A)`,
+            `Penyederhanaan birokrasi dan transparansi estimasi waktu (Pilihan B)`,
+            `Penyediaan kanal pengaduan masyarakat yang terintegrasi (Pilihan C)`,
+            `Penerapan standar operasional prosedur yang baku (Pilihan D)`,
+            `Evaluasi berkala terhadap kinerja unit pelayanan (Pilihan E)`
+          ],
+          key: k,
+          explanation: `Pembahasan Soal Nomor ${num}: Opsi ${k} adalah jawaban paling tepat karena sesuai dengan indikator reformasi birokrasi dan standar penilaian pelayanan publik.`
+        };
+      }
+
+      document.getElementById('question-text').textContent = qData.q;
+      document.getElementById('kunci-jawaban').textContent = qData.key;
+      document.getElementById('pembahasan-text').textContent = qData.explanation;
+
+      const optContainer = document.getElementById('options-container');
+      optContainer.innerHTML = '';
+      ['A', 'B', 'C', 'D', 'E'].forEach((letter, idx) => {
+        const isKey = letter === qData.key;
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left group transition-all duration-200";
+        btn.innerHTML = isKey ? `
+          <div class="bg-primary/10 border-primary/60 glow-primary rounded-xl flex items-start gap-4 border transition-all p-3">
+            <div class="w-8 h-8 rounded-lg bg-primary text-on-primary font-bold text-sm flex items-center justify-center">${letter}</div>
+            <p class="text-on-surface pt-1 text-sm">${qData.options[idx]}</p>
+          </div>
+        ` : `
+          <div class="glass-card border-white/5 hover:border-primary/50 hover:bg-primary/5 group-active:scale-[0.98] rounded-xl flex items-start gap-4 transition-all p-3">
+            <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 group-hover:border-primary/40 text-on-surface-variant group-hover:text-primary font-bold text-sm">${letter}</div>
+            <p class="text-on-surface-variant group-hover:text-on-surface pt-1 text-sm">${qData.options[idx]}</p>
+          </div>
+        `;
+        optContainer.appendChild(btn);
+      });
+
+      // Update prev & next buttons visibility
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      if (btnPrev) {
+        if (num === 1) {
+          btnPrev.classList.add('hidden');
+        } else {
+          btnPrev.classList.remove('hidden');
+        }
+      }
+      if (btnNext) {
+        if (num === totalQ) {
+          btnNext.classList.add('hidden');
+        } else {
+          btnNext.classList.remove('hidden');
+        }
+      }
+
+      renderGrid();
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('navigator-grid');
+      grid.innerHTML = '';
+      for (let i = 1; i <= totalQ; i++) {
+        const div = document.createElement('div');
+        const isActive = i === currentQ;
+        if (isActive) {
+          div.className = "aspect-square flex items-center justify-center rounded bg-primary text-on-primary font-bold text-[10px] cursor-pointer shadow-md";
+        } else {
+          div.className = "aspect-square flex items-center justify-center rounded bg-surface-container/50 border border-white/5 text-on-surface-variant hover:border-primary/50 cursor-pointer transition-all text-[10px]";
+        }
+        div.textContent = String(i).padStart(2, '0');
+        div.onclick = () => renderQuestion(i);
+        grid.appendChild(div);
+      }
+    }
+
+    document.getElementById('btn-next').onclick = () => {
+      if (currentQ < totalQ) {
+        renderQuestion(currentQ + 1);
+      }
+    };
+
+    document.getElementById('btn-prev').onclick = () => {
+      if (currentQ > 1) {
+        renderQuestion(currentQ - 1);
+      }
+    };
+
+    function updateUIState() {
+      let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      document.querySelectorAll('.auth-login-btn').forEach(btn => {
+        btn.style.display = isLoggedIn ? 'none' : 'block';
+      });
+      document.querySelectorAll('.auth-profile-pic').forEach(pic => {
+        pic.style.display = isLoggedIn ? 'block' : 'none';
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUIState();
+      renderQuestion(1);
+    });
+  </script>
+
+
+<script id="smooth-transitions">
+document.addEventListener("DOMContentLoaded", () => {
+    // Add page fade-in class
+    document.body.classList.add("page-fade-in");
+    
+    // Intercept link clicks for page fade-out
+    document.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (href && href.endsWith(".html") && !href.startsWith("http") && !link.target && href !== "#") {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.body.classList.add("page-fade-out");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        }
+    });
+});
+</script>
+</body></html>

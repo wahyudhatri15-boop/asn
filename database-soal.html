@@ -1,0 +1,1330 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><script defer src="https://unpkg.com/mathlive">
+    document.addEventListener('DOMContentLoaded', () => setGame('twk'));
+</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+    try {
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-tint": "#FF9500",
+              "surface-bright": "#1c1c1e",
+              "on-primary-container": "#000000",
+              "error": "#ff453a",
+              "on-secondary-fixed-variant": "#d8e2ff",
+              "on-tertiary": "#000000",
+              "secondary-fixed-dim": "#c2c1ff",
+              "on-tertiary-fixed-variant": "#ffdbcc",
+              "primary-fixed": "#ff9500",
+              "on-primary-fixed": "#000000",
+              "inverse-on-surface": "#1a1b1f",
+              "outline": "#8e8e93",
+              "on-tertiary-fixed": "#351000",
+              "secondary": "#5e5ce6",
+              "surface-container-high": "#2c2c2e",
+              "primary": "#FF9500",
+              "background": "#000000",
+              "primary-fixed-dim": "#ffb340",
+              "surface-container": "#1c1c1e",
+              "on-error": "#000000",
+              "tertiary-container": "#c64f00",
+              "on-tertiary-container": "#fffbff",
+              "secondary-fixed": "#e2dfff",
+              "on-secondary": "#ffffff",
+              "error-container": "#4a0005",
+              "primary-container": "#FF9500",
+              "tertiary-fixed-dim": "#ffb595",
+              "inverse-surface": "#e3e2e7",
+              "surface-variant": "#3a3a3c",
+              "inverse-primary": "#0058bc",
+              "on-surface": "#ffffff",
+              "on-primary-fixed-variant": "#004493",
+              "surface-container-highest": "#3a3a3c",
+              "tertiary": "#ff9f0a",
+              "on-background": "#ffffff",
+              "surface-container-low": "#0e0e10",
+              "surface": "#000000",
+              "surface-container-lowest": "#000000",
+              "on-error-container": "#ffdad6",
+              "outline-variant": "#48484a",
+              "on-primary": "#000000",
+              "on-secondary-container": "#fffbff",
+              "on-secondary-fixed": "#0c006a",
+              "on-surface-variant": "#a1a1aa",
+              "secondary-container": "#5e5ce6",
+              "tertiary-fixed": "#ffdbcc",
+              "surface-dim": "#1c1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "stack-lg": "48px",
+              "stack-sm": "12px",
+              "container-padding-desktop": "40px",
+              "unit": "8px",
+              "stack-md": "24px",
+              "gutter": "24px",
+              "container-padding-mobile": "20px"
+            },
+            "fontFamily": {
+              "headline-lg-mobile": ["Inter"],
+              "headline-lg": ["Inter"],
+              "display": ["Inter"],
+              "body-sm": ["Inter"],
+              "body-lg": ["Inter"],
+              "label-caps": ["Inter"],
+              "title-md": ["Inter"]
+            },
+            "fontSize": {
+              "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+              "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+              "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}],
+              "body-lg": ["17px", {"lineHeight": "1.5", "fontWeight": "400"}],
+              "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    } catch (_e) {}
+  }catch(_e){}</script>
+<style id="page-transition">
+
+  /* Modal transitions */
+  .modal-animate-bg {
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .modal-animate-bg.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-animate-content {
+    transform: scale(0.95) translateY(15px);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease-out;
+  }
+  .modal-animate-bg.show .modal-animate-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+    
+
+  /* Smooth Page transition */
+  body {
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  body.page-fade-in {
+    opacity: 1;
+  }
+  body.page-fade-out {
+    opacity: 0;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .accordion-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+  }
+  .accordion-wrapper.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .accordion-inner {
+    overflow: hidden;
+  }
+  
+  math-field::part(virtual-keyboard-toggle) {
+    display: none !important;
+  }
+  math-field::part(menu-toggle) {
+    display: none !important;
+  }
+  
+  math-field {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    max-width: 100%;
+  }
+  
+  math-field::part(container) {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    max-width: 100%;
+  }
+  
+  math-field::part(content) {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    max-width: 100%;
+    display: inline-block;
+  }
+</style>
+
+<script id="reload-redirect">
+    // Redirect to main menu on page reload
+    if (performance.getEntriesByType("navigation").length > 0) {
+        if (performance.getEntriesByType("navigation")[0].type === "reload") {
+            const currentPage = window.location.pathname.split('/').pop();
+            if (currentPage !== 'index.html' && currentPage !== '') {
+                window.location.href = 'index.html';
+            }
+        }
+    }
+</script>
+<script src="default_math_db.js"></script>
+<script src="default_we_db.js"></script>
+  <script src="https://unpkg.com/mathlive"></script>
+</head><body class="text-on-background font-body-lg min-h-screen relative bg-background overflow-y-scroll">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-desktop py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-[0_20px_40px_rgba(0,0,0,0.2)] hidden md:flex">
+<div class="flex items-center gap-4">
+<a href="index.html" class="font-display text-display text-primary tracking-tighter hover:opacity-80 transition-opacity" style="font-size: 24px;">Ruang ASN</a>
+</div>
+<div class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="index.html">Belajar</a>
+
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="history.html">Riwayat</a>
+
+<a class="font-label-caps text-label-caps text-primary font-semibold hover:bg-white/5 transition-all duration-300 px-3 py-2 rounded-lg" href="database-soal.html">Database</a>
+</div>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</nav>
+<!-- Mobile Header -->
+<header class="fixed top-0 w-full z-[200] flex justify-between items-center px-container-padding-mobile py-1 md:py-1 bg-background/80 backdrop-blur-xl border-b border-white/5 md:hidden">
+<a href="index.html" class="font-display text-primary tracking-tighter text-xl font-bold hover:opacity-80 transition-opacity">Ruang ASN</a>
+<div class="flex items-center gap-4">
+
+
+
+</div>
+</header>
+
+
+<main id="main-content" class="flex-grow pt-24 pb-32 px-container-padding-mobile md:px-container-padding-desktop max-w-[1200px] mx-auto w-full min-h-screen transition-all duration-300">
+
+    <!-- Page Title -->
+    <div class="mb-12 text-center md:text-left">
+    <h1 class="font-display text-display md:text-display text-glow mb-4 text-primary-container">Database</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl font-body-md">Kelola seluruh soal yang ada di sistem ini. Anda dapat melihat, menambah, dan mengubah soal untuk persiapan CPNS secara maksimal.</p>
+    </div>
+
+    <section class="max-w-4xl mx-auto space-y-8">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2" id="level-tabs">
+                <!-- Rendered via JS -->
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest" id="total-questions-count">Total: 0</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3 overflow-x-auto scrollbar-hide py-2 mb-6" id="game-tabs">
+            <button class="flex-none px-4 py-1.5 rounded-full bg-primary text-black font-bold text-xs shadow-[0_0_10px_rgba(255,149,0,0.3)] transition-all">TWK</button>
+            <button class="flex-none px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant text-xs font-medium hover:bg-white/10 hover:text-white transition-all">TIU</button>
+            <button class="flex-none px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface-variant text-xs font-medium hover:bg-white/10 hover:text-white transition-all">TKP</button>
+        </div>
+
+        <div id="questions-list" class="space-y-6">
+            <!-- Questions rendered here -->
+        </div>
+    </section>
+
+    <!-- Modal Form -->
+    <div id="question-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm modal-animate-bg flex items-center justify-center p-4">
+        <div class="bg-surface-container border border-white/10 rounded-2xl w-full max-w-7xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto modal-animate-content">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-on-surface-variant hover:text-white">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="text-xl font-bold text-primary mb-6" id="modal-title">Tambah Soal</h3>
+            
+            <form id="question-form" class="space-y-6" onsubmit="saveQuestion(event)">
+                <input type="hidden" id="q-index" value="-1">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Left Column: Question input, formatting, and explanation -->
+                    <div class="space-y-4 flex flex-col justify-between h-full">
+                        <div class="space-y-4">
+                            <div id="custom-math-toolbar">
+                                <div class="flex flex-wrap gap-2">
+                                    <button type="button" onclick="insertFraction()" class="px-4 py-2 bg-white/5 hover:bg-primary/20 hover:text-primary border border-white/10 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                                        <span class="text-lg">◻/◻</span> Pecahan
+                                    </button>
+                                    <button type="button" onclick="formatText('bold')" class="px-4 py-2 bg-white/5 hover:bg-primary/20 hover:text-primary border border-white/10 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                                        <span class="text-lg font-bold">B</span> Bold
+                                    </button>
+                                    <button type="button" onclick="formatText('italic')" class="px-4 py-2 bg-white/5 hover:bg-primary/20 hover:text-primary border border-white/10 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                                        <span class="text-lg italic font-serif">I</span> Italic
+                                    </button>
+                                    <button type="button" onclick="formatText('normal')" class="px-4 py-2 bg-white/5 hover:bg-primary/20 hover:text-primary border border-white/10 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                                        <span class="text-lg">A</span> Biasa
+                                    </button>
+                                </div>
+                                <p class="text-[10px] text-on-surface-variant mt-2">Gunakan tombol di atas untuk memformat teks (blok teks yang ingin diubah lalu klik format).</p>
+                            </div>
+                            
+                            <div id="q-text-container">
+                                <label class="block text-sm font-medium text-on-surface-variant mb-2">Pertanyaan</label>
+                                <div class="flex items-start gap-2">
+                                    <div class="flex-grow min-w-0">
+                                        <textarea default-mode="text" id="q-text" math-virtual-keyboard-policy="manual" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-primary focus:outline-none" style="min-height: 140px;"></textarea>
+                                        <input type="text" id="q-text-plain" autocapitalize="sentences" required class="hidden w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                    </div>
+                                    <label for="q-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar">
+                                        <span class="material-symbols-outlined text-[20px]">attach_file</span>
+                                    </label>
+                                </div>
+                                <input type="file" id="q-image" accept="image/*" class="hidden">
+                                <div id="q-image-preview-container" class="relative inline-block mt-3 hidden group w-fit">
+        <img id="q-image-preview" src="" class="max-h-40 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+                            </div>
+                        </div>
+                        
+                        <div id="q-pembahasan-container" class="pt-2">
+                            <label class="block text-sm font-medium text-on-surface-variant mb-2">Pembahasan Soal</label>
+                            <textarea default-mode="text" id="q-pembahasan" math-virtual-keyboard-policy="manual" autocapitalize="sentences" class="w-full max-w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-primary focus:outline-none min-w-0" style="min-height: 140px;"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Answers and multiple-choice options -->
+                    <div class="space-y-4">
+                        <div id="q-answer-container">
+                            <label class="block text-sm font-medium text-on-surface-variant mb-2">Jawaban Benar</label>
+                            <div class="flex items-start gap-2">
+                                <div class="flex-grow min-w-0">
+                                    <textarea default-mode="text" id="q-answer" math-virtual-keyboard-policy="manual" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-primary focus:outline-none" style="min-height: 80px;"></textarea>
+                                    <input type="text" id="q-answer-plain" autocapitalize="sentences" required class="hidden w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                                </div>
+                                <label for="q-answer-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar">
+                                    <span class="material-symbols-outlined text-[20px]">attach_file</span>
+                                </label>
+                            </div>
+                            <input type="file" id="q-answer-image" accept="image/*" class="hidden">
+                            <div id="q-answer-image-preview-container" class="relative inline-block mt-3 hidden group w-fit">
+        <img id="q-answer-image-preview" src="" class="max-h-40 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-answer-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+                        </div>
+                        
+                        <div id="options-container" class="hidden">
+                            <label class="block text-sm font-medium text-on-surface-variant mb-2">Pilihan Jawaban (Khusus Soal Pilihan Ganda)</label>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="relative flex-grow flex items-center">
+                                            <input type="radio" name="correct-option" value="1" id="q-radio-1" class="absolute left-3 w-4 h-4 text-primary focus:ring-primary border-white/20 bg-black/50 cursor-pointer" checked>
+                                            <textarea id="q-opt-1" rows="3" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Opsi A"></textarea>
+                                        </div>
+                                        <label for="q-opt-1-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar Opsi A">
+                                            <span class="material-symbols-outlined text-[20px]">image</span>
+                                        </label>
+                                        <input type="file" id="q-opt-1-image" accept="image/*" class="hidden">
+                                    </div>
+                                    <div id="q-opt-1-image-preview-container" class="relative inline-block hidden group w-fit">
+        <img id="q-opt-1-image-preview" src="" class="max-h-24 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-opt-1-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+<div id="tkp-score-container-1" class="hidden flex items-center gap-2 mt-2"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-1" min="1" max="5" class="w-16 text-center bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+<div id="tkp-score-container-1" class="hidden flex items-center gap-2 mt-2 w-full"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-1" min="1" max="5" class="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="relative flex-grow flex items-center">
+                                            <input type="radio" name="correct-option" value="2" id="q-radio-2" class="absolute left-3 w-4 h-4 text-primary focus:ring-primary border-white/20 bg-black/50 cursor-pointer" >
+                                            <textarea id="q-opt-2" rows="3" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Opsi B"></textarea>
+                                        </div>
+                                        <label for="q-opt-2-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar Opsi B">
+                                            <span class="material-symbols-outlined text-[20px]">image</span>
+                                        </label>
+                                        <input type="file" id="q-opt-2-image" accept="image/*" class="hidden">
+                                    </div>
+                                    <div id="q-opt-2-image-preview-container" class="relative inline-block hidden group w-fit">
+        <img id="q-opt-2-image-preview" src="" class="max-h-24 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-opt-2-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+<div id="tkp-score-container-2" class="hidden flex items-center gap-2 mt-2"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-2" min="1" max="5" class="w-16 text-center bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+<div id="tkp-score-container-2" class="hidden flex items-center gap-2 mt-2 w-full"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-2" min="1" max="5" class="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="relative flex-grow flex items-center">
+                                            <input type="radio" name="correct-option" value="3" id="q-radio-3" class="absolute left-3 w-4 h-4 text-primary focus:ring-primary border-white/20 bg-black/50 cursor-pointer" >
+                                            <textarea id="q-opt-3" rows="3" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Opsi C"></textarea>
+                                        </div>
+                                        <label for="q-opt-3-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar Opsi C">
+                                            <span class="material-symbols-outlined text-[20px]">image</span>
+                                        </label>
+                                        <input type="file" id="q-opt-3-image" accept="image/*" class="hidden">
+                                    </div>
+                                    <div id="q-opt-3-image-preview-container" class="relative inline-block hidden group w-fit">
+        <img id="q-opt-3-image-preview" src="" class="max-h-24 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-opt-3-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+<div id="tkp-score-container-3" class="hidden flex items-center gap-2 mt-2"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-3" min="1" max="5" class="w-16 text-center bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+<div id="tkp-score-container-3" class="hidden flex items-center gap-2 mt-2 w-full"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-3" min="1" max="5" class="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="relative flex-grow flex items-center">
+                                            <input type="radio" name="correct-option" value="4" id="q-radio-4" class="absolute left-3 w-4 h-4 text-primary focus:ring-primary border-white/20 bg-black/50 cursor-pointer" >
+                                            <textarea id="q-opt-4" rows="3" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Opsi D"></textarea>
+                                        </div>
+                                        <label for="q-opt-4-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar Opsi D">
+                                            <span class="material-symbols-outlined text-[20px]">image</span>
+                                        </label>
+                                        <input type="file" id="q-opt-4-image" accept="image/*" class="hidden">
+                                    </div>
+                                    <div id="q-opt-4-image-preview-container" class="relative inline-block hidden group w-fit">
+        <img id="q-opt-4-image-preview" src="" class="max-h-24 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-opt-4-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+<div id="tkp-score-container-4" class="hidden flex items-center gap-2 mt-2"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-4" min="1" max="5" class="w-16 text-center bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+<div id="tkp-score-container-4" class="hidden flex items-center gap-2 mt-2 w-full"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-4" min="1" max="5" class="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="relative flex-grow flex items-center">
+                                            <input type="radio" name="correct-option" value="5" id="q-radio-5" class="absolute left-3 w-4 h-4 text-primary focus:ring-primary border-white/20 bg-black/50 cursor-pointer" >
+                                            <textarea id="q-opt-5" rows="3" autocapitalize="sentences" class="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Opsi E"></textarea>
+                                        </div>
+                                        <label for="q-opt-5-image" class="cursor-pointer flex-none text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10" title="Lampirkan Gambar Opsi E">
+                                            <span class="material-symbols-outlined text-[20px]">image</span>
+                                        </label>
+                                        <input type="file" id="q-opt-5-image" accept="image/*" class="hidden">
+                                    </div>
+                                    <div id="q-opt-5-image-preview-container" class="relative inline-block hidden group w-fit">
+        <img id="q-opt-5-image-preview" src="" class="max-h-24 rounded-lg border border-white/10 object-contain">
+        <button type="button" onclick="removeImage('q-opt-5-image')" class="absolute -top-2 -right-2 bg-error hover:bg-red-600 text-white p-1 rounded-full shadow-lg transition-all z-10">
+            <span class="material-symbols-outlined text-[14px]" style="display: block;">close</span>
+        </button>
+    </div>
+<div id="tkp-score-container-5" class="hidden flex items-center gap-2 mt-2"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-5" min="1" max="5" class="w-16 text-center bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+<div id="tkp-score-container-5" class="hidden flex items-center gap-2 mt-2 w-full"><label class="text-xs text-on-surface-variant font-bold uppercase tracking-widest shrink-0">Skor TKP:</label><input type="number" id="q-tkp-score-5" min="1" max="5" class="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-white text-sm focus:border-primary focus:outline-none" placeholder="1-5"></div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-on-surface-variant mt-2">Pilih salah satu lingkaran di atas untuk menentukan Jawaban Benar.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-4 flex justify-end gap-3 border-t border-white/10">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-lg font-medium text-on-surface-variant hover:bg-white/5 transition-all">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg font-bold bg-primary text-black hover:opacity-90 transition-opacity">Simpan</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    
+    <!-- Part Modal -->
+    <div id="part-modal" class="fixed inset-0 z-[110] bg-black/80 backdrop-blur-sm modal-animate-bg flex items-center justify-center p-4">
+        <div class="bg-surface-container border border-white/10 rounded-2xl w-full max-w-sm p-6 shadow-2xl relative modal-animate-content">
+            <button onclick="closePartModal()" class="absolute top-4 right-4 text-on-surface-variant hover:text-white">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="text-xl font-bold text-primary mb-6" id="part-modal-title">Edit Part</h3>
+            <div class="space-y-4">
+                <input type="hidden" id="part-id" value="">
+                <div>
+                    <label class="block text-sm font-medium text-on-surface-variant mb-2">Nama Part</label>
+                    <input type="text" id="part-name-input" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Contoh: Part 1">
+                </div>
+                <div class="pt-4 flex justify-between gap-3">
+                    <button type="button" onclick="deleteCurrentPart()" id="btn-delete-part" class="px-4 py-2 rounded-lg font-bold bg-error/20 text-error hover:bg-error hover:text-white transition-all">Hapus Part</button>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="closePartModal()" class="px-4 py-2 rounded-lg font-medium text-on-surface-variant hover:bg-white/5 transition-all">Batal</button>
+                        <button type="button" onclick="savePart()" class="px-4 py-2 rounded-lg font-bold bg-primary text-black hover:opacity-90 transition-opacity">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // let currentGame = 'math_blitz';
+        
+        
+        let lastFocusedMathField = null;
+        
+        // Track focus on math fields
+        document.addEventListener('focusin', (e) => {
+            if (e.target.tagName.toLowerCase() === 'math-field') {
+                lastFocusedMathField = e.target;
+            }
+        });
+
+        function insertFraction() {
+            let field = lastFocusedMathField || document.getElementById('q-text');
+            if (field && field.insert) {
+                field.insert('\\frac{#0}{#?}');
+                field.focus();
+            }
+        }
+
+        function formatText(style) {
+            let field = lastFocusedMathField || document.getElementById('q-text');
+            if (field && field.insert) {
+                if (style === 'bold') {
+                    field.insert('\\textbf{#0}');
+                } else if (style === 'italic') {
+                    field.insert('\\textit{#0}');
+                } else if (style === 'normal') {
+                    field.insert('\\text{#0}');
+                }
+                field.focus();
+            }
+        }
+
+
+        let currentLevel = 1;
+        let currentGame = 'twk';
+        let questions = [];
+
+        function setGame(game) {
+            currentGame = game;
+            currentLevel = 1;
+            renderGameTabs();
+            renderTabs();
+            loadDB();
+        }
+
+        function renderGameTabs() {
+            const container = document.getElementById('game-tabs');
+            
+            let twkClass = currentGame === 'twk' ? 'bg-primary text-black font-bold shadow-[0_0_10px_rgba(255,149,0,0.3)]' : 'bg-white/5 border border-white/10 text-on-surface-variant hover:text-white hover:bg-white/10';
+            let tiuClass = currentGame === 'tiu' ? 'bg-primary text-black font-bold shadow-[0_0_10px_rgba(255,149,0,0.3)]' : 'bg-white/5 border border-white/10 text-on-surface-variant hover:text-white hover:bg-white/10';
+            let tkpClass = currentGame === 'tkp' ? 'bg-primary text-black font-bold shadow-[0_0_10px_rgba(255,149,0,0.3)]' : 'bg-white/5 border border-white/10 text-on-surface-variant hover:text-white hover:bg-white/10';
+            
+            container.innerHTML = `
+                <button onclick="setGame('twk')" class="flex-none px-4 py-1.5 rounded-full text-xs transition-all ${twkClass}">TWK</button>
+                <button onclick="setGame('tiu')" class="flex-none px-4 py-1.5 rounded-full text-xs transition-all ${tiuClass}">TIU</button>
+                <button onclick="setGame('tkp')" class="flex-none px-4 py-1.5 rounded-full text-xs transition-all ${tkpClass}">TKP</button>
+            `;
+        }
+
+        function renderTabs() {
+            const tabsContainer = document.getElementById('level-tabs');
+            let html = '';
+            let parts = getParts(currentGame);
+            let isActiveValid = false;
+            
+            parts.forEach(p => {
+                if (p.id === currentLevel) isActiveValid = true;
+                if (p.id === currentLevel) {
+                    html += `<div class="flex items-center gap-1 bg-primary text-black rounded-lg shadow-[0_0_8px_rgba(255,149,0,0.2)]">
+                        <button class="px-4 py-2 text-xs font-bold tracking-tighter">${p.name}</button>
+                        <button onclick="openPartModal(${p.id})" class="pr-2 hover:opacity-70 flex items-center" title="Edit Part"><span class="material-symbols-outlined text-[14px]">edit</span></button>
+                    </div>`;
+                } else {
+                    html += `<button onclick="setLevel(${p.id})" class="px-4 py-2 rounded-lg text-xs font-bold tracking-tighter transition-all bg-white/5 border border-white/10 text-on-surface-variant hover:border-primary/30 hover:text-primary">${p.name}</button>`;
+                }
+            });
+            
+            if (!isActiveValid && parts.length > 0) {
+                currentLevel = parts[0].id;
+                setTimeout(renderTabs, 0);
+                setTimeout(loadDB, 0);
+                return;
+            }
+
+            html += `<button onclick="addNewPart()" class="px-3 py-2 rounded-lg bg-white/5 text-on-surface-variant hover:text-white border border-white/10 hover:border-white/30 flex items-center justify-center" title="Tambah Part Baru"><span class="material-symbols-outlined text-[16px]">add</span></button>`;
+            
+            tabsContainer.innerHTML = html;
+        }
+
+        function getParts(game) {
+            let saved = localStorage.getItem(game + 'PartConfig');
+            if (saved) return JSON.parse(saved);
+            return [
+                {id: 1, name: 'Part 1'},
+                {id: 2, name: 'Part 2'},
+                {id: 3, name: 'Part 3'},
+                {id: 4, name: 'Part 4'},
+                {id: 5, name: 'Part 5'}
+            ];
+        }
+
+        function saveParts(game, parts) {
+            localStorage.setItem(game + 'PartConfig', JSON.stringify(parts));
+        }
+
+        function openPartModal(id) {
+            let parts = getParts(currentGame);
+            let part = parts.find(p => p.id === id);
+            if (!part) return;
+            
+            document.getElementById('part-id').value = id;
+            document.getElementById('part-name-input').value = part.name;
+            document.getElementById('part-modal').classList.add('show');
+            
+            if (parts.length > 1) {
+                document.getElementById('btn-delete-part').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-delete-part').classList.add('hidden');
+            }
+        }
+        
+        function closePartModal() {
+            document.getElementById('part-modal').classList.remove('show');
+        }
+
+        function savePart() {
+            let id = parseInt(document.getElementById('part-id').value);
+            let newName = document.getElementById('part-name-input').value.trim();
+            if (!newName) return alert('Nama part tidak boleh kosong');
+            
+            let parts = getParts(currentGame);
+            let part = parts.find(p => p.id === id);
+            if (part) {
+                part.name = newName;
+                saveParts(currentGame, parts);
+                renderTabs();
+            }
+            closePartModal();
+        }
+
+        function deleteCurrentPart() {
+            if(!confirm('Yakin ingin menghapus Part ini beserta SELURUH SOAL di dalamnya?')) return;
+            
+            let id = parseInt(document.getElementById('part-id').value);
+            let parts = getParts(currentGame);
+            let newParts = parts.filter(p => p.id !== id);
+            
+            if (newParts.length === 0) {
+                return alert('Tidak bisa menghapus part terakhir!');
+            }
+            
+            saveParts(currentGame, newParts);
+            localStorage.removeItem(currentGame + 'DB_level' + id);
+            
+            closePartModal();
+            renderTabs();
+        }
+
+        function addNewPart() {
+            let parts = getParts(currentGame);
+            let maxId = 0;
+            parts.forEach(p => { if (p.id > maxId) maxId = p.id; });
+            let newId = maxId + 1;
+            parts.push({id: newId, name: 'Part ' + newId});
+            saveParts(currentGame, parts);
+            renderTabs();
+        }
+
+        function setLevel(lvl) {
+            currentLevel = lvl;
+            renderTabs();
+            loadDB();
+        }
+
+        function loadDB() {
+            let key = currentGame + 'DB_level' + currentLevel;
+            let saved = localStorage.getItem(key);
+            
+            if (saved && saved !== '[]') {
+                questions = JSON.parse(saved);
+            } else if (currentGame === 'twk' && currentLevel === 1) {
+                questions = [
+    {
+        "q": "Dalam rangka menghormati umat beragama lain saat merayakan hari rayanya, sikap yang paling sesuai dengan pengamalan sila pertama Pancasila adalah...",
+        "options": [
+            "Mengucapkan selamat dan ikut bergembira dalam suasana hari raya bersama pemeluk agama lain",
+            "Membantu menjaga ketertiban lingkungan agar perayaan berjalan aman dan lancar",
+            "Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya",
+            "Menghargai perayaan dengan tidak menampilkan identitas agama sendiri demi menghindari perbedaan",
+            "Menyambut perayaan dengan ikut serta dalam ritual doa agama lain sebagai wujud kebersamaan"
+        ],
+        "a": "Memberi kesempatan umat agama lain beribadah dengan tenang tanpa mencampuri ritualnya",
+        "key": "C",
+        "pembahasan": "Sila pertama, 'Ketuhanan Yang Maha Esa,' menekankan pada kebebasan beragama dan toleransi antar umat beragama tanpa mencampuri ritual keagamaan masing-masing."
+    },
+    {
+        "q": "Integritas nasional merupakan pondasi penting dalam menjaga keutuhan NKRI. Salah satu wujud nyata dari sikap integritas sebagai seorang ASN adalah...",
+        "options": [
+            "Menolak segala bentuk gratifikasi dan melaporkannya sesuai prosedur hukum yang berlaku",
+            "Mengutamakan kepentingan kelompok tertentu yang memberikan dukungan politik",
+            "Memanfaatkan fasilitas kantor untuk kepentingan pribadi dalam batas wajar",
+            "Menerima imbalan tambahan atas pelayanan publik yang cepat dan memuaskan",
+            "Menyimpan informasi publik yang wajib dibuka demi pertimbangan subjektif"
+        ],
+        "a": "Menolak segala bentuk gratifikasi dan melaporkannya sesuai prosedur hukum yang berlaku",
+        "key": "A",
+        "pembahasan": "Menolak segala bentuk gratifikasi dan berani melaporkannya adalah nilai utama dari integritas seorang Aparatur Sipil Negara."
+    },
+    {
+        "q": "Semua mahasiswa psikologi memelajari perilaku manusia. Sebagian orang yang memelajari perilaku manusia menjadi konselor yang sukses. Kesimpulan yang benar adalah...",
+        "options": [
+            "Semua mahasiswa psikologi pasti menjadi konselor yang sukses",
+            "Sebagian mahasiswa psikologi mungkin menjadi konselor yang sukses",
+            "Tidak ada mahasiswa psikologi yang menjadi konselor sukses",
+            "Semua konselor yang sukses adalah mahasiswa psikologi",
+            "Orang yang bukan mahasiswa psikologi tidak bisa menjadi konselor"
+        ],
+        "a": "Sebagian mahasiswa psikologi mungkin menjadi konselor yang sukses",
+        "key": "B",
+        "pembahasan": "Karena sebagian pemelajar perilaku manusia menjadi konselor sukses, maka sebagian mahasiswa psikologi (yang juga memelajari perilaku manusia) mungkin menjadi konselor yang sukses."
+    }
+];
+                // save default to localstorage
+                localStorage.setItem(key, JSON.stringify(questions));
+            } else {
+                questions = [];
+            }
+            
+            document.getElementById('total-questions-count').innerText = "Total: " + questions.length;
+            renderQuestions();
+        }
+
+        function saveDB() {
+            let key = currentGame + 'DB_level' + currentLevel;
+            localStorage.setItem(key, JSON.stringify(questions));
+            loadDB();
+        }
+
+        function renderQuestions() {
+            const list = document.getElementById('questions-list');
+            if (questions.length === 0) {
+                list.innerHTML = '<div class="text-center py-12 text-on-surface-variant">Belum ada soal di level ini.</div>';
+                return;
+            }
+            
+            let html = '';
+            questions.forEach((item, index) => {
+                let qText = item.q || item.question || '';
+                let aText = item.a || item.answer || '';
+                
+                html += `
+                <div class="bg-surface-container border border-white/5 rounded-2xl shadow-xl overflow-hidden group hover:border-primary/20 transition-all p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-grow min-w-0">
+                            ${item.image ? `<img src="${item.image}" class="max-w-full h-auto max-h-48 rounded-lg mb-3 object-contain">` : ''}
+                            <h2 class="text-xl font-bold text-on-surface leading-tight math-display break-words">${index + 1}. ${qText}</h2>
+                        </div>
+                        <div class="flex gap-2 shrink-0 ml-4">
+                            <button onclick="editQuestion(${index})" class="p-2 rounded-lg bg-white/5 text-primary hover:bg-primary/20 transition-all" title="Edit">
+                                <span class="material-symbols-outlined" style="font-size:18px;">edit</span>
+                            </button>
+                            <button onclick="deleteQuestion(${index})" class="p-2 rounded-lg bg-white/5 text-error hover:bg-error/20 transition-all" title="Hapus">
+                                <span class="material-symbols-outlined" style="font-size:18px;">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                let showOptions = true;
+                if (!showOptions) {
+                    html += `
+                    <div class="bg-success/10 border border-success/30 rounded-lg p-3 inline-block">
+                        <span class="text-sm font-bold text-success math-display">Jawaban: ${aText}</span>
+                        ${item.aImage ? `<img src="${item.aImage}" class="mt-2 max-w-full h-auto max-h-40 rounded-lg object-contain">` : ''}
+                    </div>
+                    `;
+                }
+                if (showOptions && item.options) {
+                    html += `<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">`;
+                    item.options.forEach((opt, i) => {
+                        let isCorrect = (opt === aText && opt !== '') || (item.aImage && item.optImages && item.optImages[i] === item.aImage && opt === '');
+                        let bg = isCorrect ? 'bg-primary/20 text-primary border-primary/30' : 'bg-white/5 text-on-surface-variant border-white/10';
+                        let optImgHtml = (item.optImages && item.optImages[i]) ? `<img src="${item.optImages[i]}" class="mt-2 max-w-full h-auto max-h-32 rounded-lg object-contain border border-white/10">` : '';
+                        html += `<div class="p-3 rounded-lg border ${bg} flex flex-col justify-center">
+                                    <div class="flex items-start gap-2">
+                                        <span class="text-sm font-bold shrink-0">${String.fromCharCode(65 + i)}.</span>
+                                        <div class="flex-grow min-w-0 overflow-hidden">
+                                            ${opt ? `<span class="text-sm font-medium math-display break-words">${opt}</span>` : ''}
+                                            ${optImgHtml}
+                                        </div>
+                                    </div>
+                                 </div>`;
+                    });
+                    html += `</div>`;
+                    if (item.aImage) {
+                        html += `<div class="mt-3"><img src="${item.aImage}" class="max-w-full h-auto max-h-40 rounded-lg object-contain border border-white/10"></div>`;
+                    }
+                }
+
+                if (item.pembahasan) {
+                    html += `
+                    <div class="mt-4 p-4 rounded-lg bg-info/10 border border-info/30">
+                        <h4 class="text-xs font-bold text-info uppercase tracking-wider mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">lightbulb</span> Pembahasan</h4>
+                        <div class="text-sm text-on-surface math-display">${item.pembahasan}</div>
+                    </div>
+                    `;
+                }
+                
+                html += `</div>`;
+            });
+            list.innerHTML = html;
+            if (false) {
+                setTimeout(() => {
+                    document.querySelectorAll('.math-display').forEach(el => {
+                        let text = el.innerText;
+                        let innerHtml = '';
+                        if (text.startsWith('Jawaban: ')) {
+                            let mathPart = text.replace('Jawaban: ', '');
+                            innerHtml = 'Jawaban: <math-field default-mode="text" readonly style="display:inline-block; pointer-events:none; background:transparent; border:none; padding:0; margin:0;" class="text-success">' + mathPart + '</math-field>';
+                        } else {
+                            innerHtml = '<math-field default-mode="text" readonly style="display:inline-block; pointer-events:none; background:transparent; border:none; padding:0; margin:0;" class="text-white">' + text + '</math-field>';
+                        }
+                        el.innerHTML = innerHtml;
+                    });
+                }, 50);
+            }
+        }
+
+        function openAddModal() {
+            document.getElementById('modal-title').innerText = "Tambah Soal " + (questions.length + 1);
+            document.getElementById('q-index').value = -1;
+            var isTKP = (currentGame.toUpperCase() === 'TKP');
+            for(let i=1; i<=5; i++) {
+                var ts = document.getElementById('q-tkp-score-'+i);
+                if(ts) ts.value = '';
+                var tc = document.getElementById('tkp-score-container-'+i);
+                if(tc) { if(isTKP) tc.classList.remove('hidden'); else tc.classList.add('hidden'); }
+            }
+            var isTKP = (currentGame.toUpperCase() === 'TKP');
+            for(let i=1; i<=5; i++) {
+                var ts = document.getElementById('q-tkp-score-'+i);
+                if(ts) ts.value = '';
+                var tc = document.getElementById('tkp-score-container-'+i);
+                if(tc) { if(isTKP) tc.classList.remove('hidden'); else tc.classList.add('hidden'); }
+            }
+
+            document.getElementById('q-image').value = '';
+            document.getElementById('q-image-preview').src = '';
+            document.getElementById('q-image-preview-container').classList.add('hidden');
+            window.currentQuestionImage = null;
+
+            document.getElementById('q-answer-image').value = '';
+            document.getElementById('q-answer-image-preview').src = '';
+            document.getElementById('q-answer-image-preview-container').classList.add('hidden');
+            window.currentAnswerImage = null;
+
+            for(let i=1; i<=5; i++) {
+                if (document.getElementById('q-opt-'+i+'-image')) {
+                    document.getElementById('q-opt-'+i+'-image').value = '';
+                    document.getElementById('q-opt-'+i+'-image-preview').src = '';
+                    document.getElementById('q-opt-'+i+'-image-preview-container').classList.add('hidden');
+                    window['currentOpt' + i + 'Image'] = null;
+                }
+            }
+
+            if (document.getElementById('q-pembahasan').setValue) {
+                document.getElementById('q-pembahasan').setValue('');
+            } else {
+                document.getElementById('q-pembahasan').value = '';
+            }
+            
+            let isMath = true;
+            
+            if (isMath) {
+                document.getElementById('q-text').classList.remove('hidden');
+                document.getElementById('q-answer').classList.remove('hidden');
+                document.getElementById('q-text-plain').classList.add('hidden');
+                document.getElementById('q-answer-plain').classList.add('hidden');
+                
+                if (document.getElementById('q-text').setValue) {
+                    document.getElementById('q-text').setValue('');
+                    document.getElementById('q-answer').setValue('');
+                } else {
+                    document.getElementById('q-text').value = '';
+                    document.getElementById('q-answer').value = '';
+                }
+                document.getElementById('q-text-plain').required = false;
+                document.getElementById('q-answer-plain').required = false;
+            } else {
+                document.getElementById('q-text').classList.add('hidden');
+                document.getElementById('q-answer').classList.add('hidden');
+                document.getElementById('q-text-plain').classList.remove('hidden');
+                document.getElementById('q-answer-plain').classList.remove('hidden');
+                
+                document.getElementById('q-text-plain').value = '';
+                document.getElementById('q-answer-plain').value = '';
+                document.getElementById('q-text-plain').required = true;
+                document.getElementById('q-answer-plain').required = true;
+            }
+            
+            let showOptions = true;
+            if (showOptions) {
+                document.getElementById('options-container').classList.remove('hidden');
+                document.getElementById('q-answer-container').classList.add('hidden');
+                for(let i=1; i<=5; i++) document.getElementById('q-opt-'+i).required = true;
+                document.getElementById('q-radio-1').checked = true;
+                for(let i=1; i<=5; i++) document.getElementById('q-opt-'+i).value = '';
+                
+                document.getElementById('q-answer-plain').required = false;
+            } else {
+                document.getElementById('options-container').classList.add('hidden');
+                document.getElementById('q-answer-container').classList.remove('hidden');
+                for(let i=1; i<=5; i++) document.getElementById('q-opt-'+i).required = false;
+                
+                if (!isMath) document.getElementById('q-answer-plain').required = true;
+            }
+            
+            document.getElementById('question-modal').classList.add('show');
+            setTimeout(() => {
+                let qText = document.getElementById('q-text');
+                if (!qText.classList.contains('hidden')) {
+                    qText.focus();
+                } else {
+                    document.getElementById('q-text-plain').focus();
+                }
+            }, 100);
+        }
+
+        function editQuestion(index) {
+            let item = questions[index];
+            document.getElementById('modal-title').innerText = "Edit Soal " + (index + 1);
+            document.getElementById('q-index').value = index;
+            
+            document.getElementById('q-image').value = '';
+            if (item.image) {
+                document.getElementById('q-image-preview').src = item.image;
+                document.getElementById('q-image-preview-container').classList.remove('hidden');
+                window.currentQuestionImage = item.image;
+            } else {
+                document.getElementById('q-image-preview').src = '';
+                document.getElementById('q-image-preview-container').classList.add('hidden');
+                window.currentQuestionImage = null;
+            }
+
+            document.getElementById('q-answer-image').value = '';
+            if (item.aImage) {
+                document.getElementById('q-answer-image-preview').src = item.aImage;
+                document.getElementById('q-answer-image-preview-container').classList.remove('hidden');
+                window.currentAnswerImage = item.aImage;
+            } else {
+                document.getElementById('q-answer-image-preview').src = '';
+                document.getElementById('q-answer-image-preview-container').classList.add('hidden');
+                window.currentAnswerImage = null;
+            }
+
+            for(let i=1; i<=5; i++) {
+                if (document.getElementById('q-opt-'+i+'-image')) {
+                    document.getElementById('q-opt-'+i+'-image').value = '';
+                    if (item.optImages && item.optImages[i-1]) {
+                        document.getElementById('q-opt-'+i+'-image-preview').src = item.optImages[i-1];
+                        document.getElementById('q-opt-'+i+'-image-preview-container').classList.remove('hidden');
+                        window['currentOpt' + i + 'Image'] = item.optImages[i-1];
+                    } else {
+                        document.getElementById('q-opt-'+i+'-image-preview').src = '';
+                        document.getElementById('q-opt-'+i+'-image-preview-container').classList.add('hidden');
+                        window['currentOpt' + i + 'Image'] = null;
+                    }
+                }
+            }
+
+            if (document.getElementById('q-pembahasan').setValue) {
+                document.getElementById('q-pembahasan').setValue(item.pembahasan || '');
+            } else {
+                document.getElementById('q-pembahasan').value = item.pembahasan || '';
+            }
+
+            let qText = item.q || item.question || '';
+            let aText = item.a || item.answer || '';
+            
+            let isMath = true;
+            if (isMath) {
+                document.getElementById('q-text').classList.remove('hidden');
+                document.getElementById('q-answer').classList.remove('hidden');
+                document.getElementById('q-text-plain').classList.add('hidden');
+                document.getElementById('q-answer-plain').classList.add('hidden');
+                
+                document.getElementById('q-text').value = qText;
+                document.getElementById('q-answer').value = aText;
+                
+                document.getElementById('q-text-plain').required = false;
+                document.getElementById('q-answer-plain').required = false;
+            } else {
+                document.getElementById('q-text').classList.add('hidden');
+                document.getElementById('q-answer').classList.add('hidden');
+                document.getElementById('q-text-plain').classList.remove('hidden');
+                document.getElementById('q-answer-plain').classList.remove('hidden');
+                
+                document.getElementById('q-text-plain').value = qText;
+                document.getElementById('q-answer-plain').value = aText;
+                
+                document.getElementById('q-text-plain').required = true;
+                document.getElementById('q-answer-plain').required = true;
+            }
+            
+            let showOptions = true;
+            if (showOptions) {
+                document.getElementById('options-container').classList.remove('hidden');
+                document.getElementById('q-answer-container').classList.add('hidden');
+                for(let i=1; i<=5; i++) document.getElementById('q-opt-'+i).required = true;
+                document.getElementById('q-answer-plain').required = false;
+                
+                let opts = item.options || [];
+                let optImages = item.optImages || [];
+                var isTKP = (currentGame.toUpperCase() === 'TKP');
+                var tkpScores = item.tkpScores || [];
+                var isTKP = (currentGame.toUpperCase() === 'TKP');
+                var tkpScores = item.tkpScores || [];
+                for(let i=1; i<=5; i++) {
+                    document.getElementById('q-opt-'+i).value = opts[i-1] || '';
+                    if (opts[i-1] === aText && aText !== '') {
+                        document.getElementById('q-radio-'+i).checked = true;
+                    }
+                    var ts = document.getElementById('q-tkp-score-'+i);
+                    if(ts) ts.value = tkpScores[i-1] || '';
+                    var tc = document.getElementById('tkp-score-container-'+i);
+                    if(tc) { if(isTKP) tc.classList.remove('hidden'); else tc.classList.add('hidden'); }
+                    var ts = document.getElementById('q-tkp-score-'+i);
+                    if(ts) ts.value = tkpScores[i-1] || '';
+                    var tc = document.getElementById('tkp-score-container-'+i);
+                    if(tc) { if(isTKP) tc.classList.remove('hidden'); else tc.classList.add('hidden'); }
+                    if (document.getElementById('q-opt-'+i+'-image')) {
+                        document.getElementById('q-opt-'+i+'-image').value = '';
+                        if (optImages[i-1]) {
+                            document.getElementById('q-opt-'+i+'-image-preview').src = optImages[i-1];
+                            document.getElementById('q-opt-'+i+'-image-preview-container').classList.remove('hidden');
+                            window['currentOpt' + i + 'Image'] = optImages[i-1];
+                        } else {
+                            document.getElementById('q-opt-'+i+'-image-preview').src = '';
+                            document.getElementById('q-opt-'+i+'-image-preview-container').classList.add('hidden');
+                            window['currentOpt' + i + 'Image'] = null;
+                        }
+                    }
+                }
+            } else {
+                document.getElementById('options-container').classList.add('hidden');
+                document.getElementById('q-answer-container').classList.remove('hidden');
+                for(let i=1; i<=5; i++) document.getElementById('q-opt-'+i).required = false;
+                
+                if (!isMath) document.getElementById('q-answer-plain').required = true;
+            }
+            
+            document.getElementById('question-modal').classList.add('show');
+            setTimeout(() => {
+                let qText = document.getElementById('q-text');
+                if (!qText.classList.contains('hidden')) {
+                    qText.focus();
+                } else {
+                    document.getElementById('q-text-plain').focus();
+                }
+            }, 100);
+        }
+
+        function deleteQuestion(index) {
+            if(confirm('Yakin ingin menghapus soal ini?')) {
+                questions.splice(index, 1);
+                saveDB();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('question-modal').classList.remove('show');
+        }
+
+        function saveQuestion(e) {
+            e.preventDefault();
+            let index = parseInt(document.getElementById('q-index').value);
+            let isMath = true;
+            let text = isMath ? document.getElementById('q-text').value : document.getElementById('q-text-plain').value;
+            let answer = isMath ? document.getElementById('q-answer').value : document.getElementById('q-answer-plain').value;
+            let pembahasan = document.getElementById('q-pembahasan').value;
+            
+            let newItem = {};
+            let isOptionsBased = true;
+            
+            if (isOptionsBased) {
+                newItem.q = text;
+                newItem.a = answer;
+                let opts = [];
+                let optImages = [];
+                let hasOptImages = false;
+                var isTKP = (currentGame.toUpperCase() === 'TKP');
+                var tkpScores = [];
+                var isTKP = (currentGame.toUpperCase() === 'TKP');
+                var tkpScores = [];
+                for(let i=1; i<=5; i++) {
+                    let optVal = document.getElementById('q-opt-'+i).value.trim();
+                    let optImg = window['currentOpt' + i + 'Image'];
+                    if(optVal || optImg) {
+                        opts.push(optVal);
+                        optImages.push(optImg || null);
+                        if (optImg) hasOptImages = true;
+                        if (isTKP) {
+                            var sc = parseInt(document.getElementById('q-tkp-score-'+i).value) || 0;
+                            tkpScores.push(sc);
+                        }
+                        if (isTKP) {
+                            var sc = parseInt(document.getElementById('q-tkp-score-'+i).value) || 0;
+                            tkpScores.push(sc);
+                        }
+                    }
+                }
+                
+                let selectedRadio = document.querySelector('input[name="correct-option"]:checked');
+                if (selectedRadio) {
+                    let idx = selectedRadio.value;
+                    newItem.a = document.getElementById('q-opt-'+idx).value.trim();
+                    if (window['currentOpt' + idx + 'Image']) {
+                        window.currentAnswerImage = window['currentOpt' + idx + 'Image'];
+                    }
+                } else {
+                    newItem.a = answer;
+                }
+                newItem.options = opts;
+                if (hasOptImages) newItem.optImages = optImages;
+                if (isTKP) newItem.tkpScores = tkpScores;
+                if (isTKP) newItem.tkpScores = tkpScores;
+            } else {
+                newItem.question = text;
+                newItem.answer = answer;
+            }
+            
+            if (window.currentQuestionImage) {
+                newItem.image = window.currentQuestionImage;
+            }
+            if (window.currentAnswerImage) {
+                newItem.aImage = window.currentAnswerImage;
+            }
+            if (pembahasan) {
+                newItem.pembahasan = pembahasan;
+            }
+
+            if (index >= 0) {
+                questions[index] = newItem;
+            } else {
+                questions.push(newItem);
+            }
+            
+            saveDB();
+            closeModal();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGameTabs();
+            renderTabs();
+            setTimeout(loadDB, 50);
+
+            document.getElementById('q-image').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        window.currentQuestionImage = evt.target.result;
+                        document.getElementById('q-image-preview').src = window.currentQuestionImage;
+                        document.getElementById('q-image-preview-container').classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    window.currentQuestionImage = null;
+                    document.getElementById('q-image-preview').src = '';
+                    document.getElementById('q-image-preview-container').classList.add('hidden');
+                }
+            });
+
+            for(let i=1; i<=5; i++) {
+                let imgInput = document.getElementById('q-opt-'+i+'-image');
+                if (imgInput) {
+                    imgInput.addEventListener('change', function(e) {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(evt) {
+                                window['currentOpt' + i + 'Image'] = evt.target.result;
+                                document.getElementById('q-opt-'+i+'-image-preview').src = evt.target.result;
+                                document.getElementById('q-opt-'+i+'-image-preview-container').classList.remove('hidden');
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            window['currentOpt' + i + 'Image'] = null;
+                            document.getElementById('q-opt-'+i+'-image-preview').src = '';
+                            document.getElementById('q-opt-'+i+'-image-preview-container').classList.add('hidden');
+                        }
+                    });
+                }
+            }
+
+            document.getElementById('q-answer-image').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        window.currentAnswerImage = evt.target.result;
+                        document.getElementById('q-answer-image-preview').src = window.currentAnswerImage;
+                        document.getElementById('q-answer-image-preview-container').classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    window.currentAnswerImage = null;
+                    document.getElementById('q-answer-image-preview').src = '';
+                    document.getElementById('q-answer-image-preview-container').classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('paste', (e) => {
+                let activeEl = document.activeElement;
+                if (activeEl && activeEl.tagName.toLowerCase() === 'math-field') {
+                    // Mencegah mathlive membaca format HTML bawaan (bold/italic)
+                    e.preventDefault();
+                    
+                    // Ambil hanya teks mentah (plain text)
+                    let text = (e.clipboardData || window.clipboardData).getData('text/plain');
+                    
+                    if (text) {
+                        // Bersihkan newline jika perlu
+                        text = text.replace(/\r?\n|\r/g, ' ');
+                        // Escape karakter khusus latex
+                        text = text.replace(/\\/g, '\\\\').replace(/[{}]/g, '\\$&');
+                        // Insert teks sebagai normal text (bukan variabel math/italic)
+                        activeEl.insert('\\text{' + text + '}');
+                    }
+
+                    setTimeout(() => {
+                        activeEl.executeCommand('moveToMathFieldEnd');
+                    }, 50);
+                }
+            });
+        });
+    </script>
+
+</main><button onclick="openAddModal()" class="fixed bottom-8 right-8 z-[200] flex items-center gap-2 px-6 py-3 bg-primary text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,149,0,0.4)] hover:scale-105 active:scale-95 transition-all duration-300 group">
+  <span class="material-symbols-outlined">add</span>
+  <span class="">Tambah Soal</span>
+</button>
+<script>
+    function updateUIState() {
+        let pts = parseInt(localStorage.getItem('mathBlitzStreakPoints')) || 0;
+        let el = document.getElementById('header-streak-points');
+        if (el) el.innerText = pts;
+        
+        let elMobile = document.getElementById('mobile-header-streak-points');
+        if (elMobile) elMobile.innerText = pts;
+
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        document.querySelectorAll('.auth-login-btn').forEach(btn => {
+            btn.style.display = isLoggedIn ? 'none' : 'block';
+        });
+        document.querySelectorAll('.auth-profile-pic').forEach(pic => {
+            pic.style.display = isLoggedIn ? 'block' : 'none';
+        });
+        
+        // Hide/Show Streak Numbers based on login status
+        let streakDesktop = document.getElementById('header-streak-points');
+        if (streakDesktop) streakDesktop.style.display = isLoggedIn ? '' : 'none';
+        
+        let streakMobile = document.getElementById('mobile-header-streak-points');
+        if (streakMobile) streakMobile.style.display = isLoggedIn ? '' : 'none';
+    }
+    document.addEventListener('DOMContentLoaded', updateUIState);
+</script>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            
+            sidebarItems.forEach(el => {
+                el.classList.remove('bg-white/10', 'text-primary');
+                el.classList.add('text-on-surface-variant');
+                const indicator = el.querySelector('.active-indicator');
+                if(indicator) indicator.remove();
+            });
+            
+            item.classList.add('bg-white/10', 'text-primary');
+            item.classList.remove('text-on-surface-variant');
+            
+            item.insertAdjacentHTML('afterbegin', '<div class="active-indicator absolute left-0 w-1 h-5 bg-primary rounded-r-full transition-all duration-300"></div>');
+        });
+    });
+    
+    // Set first item active by default
+    if(sidebarItems.length > 0) {
+        sidebarItems[0].click();
+    }
+});
+</script>
+
+<script id="smooth-transitions">
+document.addEventListener("DOMContentLoaded", () => {
+    // Add page fade-in class
+    document.body.classList.add("page-fade-in");
+    
+    // Intercept link clicks for page fade-out
+    document.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (href && href.endsWith(".html") && !href.startsWith("http") && !link.target && href !== "#") {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.body.classList.add("page-fade-out");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 250);
+            });
+        }
+    });
+});
+</script>
+
+    <script>
+    function removeImage(prefix) {
+        // Clear input file
+        const fileInput = document.getElementById(prefix);
+        if (fileInput) fileInput.value = '';
+        
+        // Clear preview src and hide container
+        const preview = document.getElementById(prefix + '-preview');
+        const container = document.getElementById(prefix + '-preview-container');
+        if (preview) preview.src = '';
+        if (container) container.classList.add('hidden');
+        
+        // Clear global window variables
+        if (prefix === 'q-image') window.currentQuestionImage = null;
+        if (prefix === 'q-answer-image') window.currentAnswerImage = null;
+        if (prefix.startsWith('q-opt-')) {
+            const num = prefix.split('-')[2];
+            window['currentOpt' + num + 'Image'] = null;
+        }
+    }
+    </script>
+
+</body></html>
+
